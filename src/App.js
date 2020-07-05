@@ -1,11 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Layout from './components/Layout/Layout';
 
 function App() {
   return (
     <div>
-      <h1>每日行动</h1>
+      <Layout>
+        <p>每日行动</p>
+      </Layout>
     </div>
   );
 }
