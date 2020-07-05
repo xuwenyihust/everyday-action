@@ -3,7 +3,7 @@ import './TodoItem.css';
 
 const todoItem = (props) => (
     <div>
-        <p>{props.content}</p>
+        <p>{props.type}: <strong>{props.content}</strong></p>
     </div>
 );
 
