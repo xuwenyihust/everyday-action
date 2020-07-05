@@ -5,7 +5,12 @@ import TodoItem from './TodoItem/TodoItem';
 const todoItems = (props) => {
 
     const items = props.items.map(item =>{
-        return <TodoItem key={item.id} item={item} contentClicked={props.contentClicked} closeClicked={props.closeClicked}/>
+        return <TodoItem 
+                    key={item.id} 
+                    item={item} 
+                    contentClicked={props.contentClicked} 
+                    editClicked={props.editClicked} 
+                    closeClicked={props.closeClicked}/>
     })
 
     return (

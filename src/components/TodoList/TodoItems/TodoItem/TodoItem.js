@@ -8,7 +8,8 @@ const todoItem = (props) => (
             onClick={() => props.contentClicked(props.item.id)}>{props.item.content}</p>
         <button
             type="button" 
-            className="editButton"><i className="fa fa-bars"></i></button>
+            className="editButton"
+            onClick={() => props.editClicked(props.item.id)}><i className="fa fa-bars"></i></button>
         <button 
             type="button" 
             className="closeButton"

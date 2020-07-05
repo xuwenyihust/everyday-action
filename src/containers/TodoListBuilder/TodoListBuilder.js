@@ -82,6 +82,10 @@ class TodoList extends Component {
         this.setState({items: updatedItems});
     }
 
+    editItemHandler = (itemId) => {
+        console.log(itemId);
+    }
+
     revertItemDoneHandler = (itemId) => {
         let updatedItems = this.state.items;
         let updatedItem = updatedItems.find(item => item.id === itemId);
@@ -95,10 +99,11 @@ class TodoList extends Component {
             <div className='TodoListBuilder'>
                 <h4>任务清单</h4>
                 <TodoForm value={this.state.itemToSubmit.content} inputChanged={this.inputChangeHandler} submitted={this.addItemHandler}/>
-                <TodoItems items={this.state.items} contentClicked={this.revertItemDoneHandler} closeClicked={this.removeItemHandler}/>
-                {/* <ul>
-                    {items}
-                </ul> */}
+                <TodoItems 
+                    items={this.state.items} 
+                    contentClicked={this.revertItemDoneHandler} 
+                    editClicked={this.editItemHandler}
+                    closeClicked={this.removeItemHandler}/>
             </div>
         )
     }
