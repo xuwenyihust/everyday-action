@@ -1,22 +1,21 @@
 .TodoItem {
+    /* display: block; */
     display: flex;
+    /* box-sizing: border-box; */
 
-    /* width : 500px;
-    height: 20px; */
-
-    /* padding-top: 10px;
-    padding-bottom: 10px; */
     padding: 10px;
+
+    margin-bottom: 10px;
 
     border: 1px solid grey;
     border-radius: 5px;
-    
-    background-color: white;
 
-    margin-bottom: 10px;
+    background-color: white;
+    text-align: left;
 }
 
 .TodoItem p {
+    /* display: inline-block; */
     margin-top: 0px;
     margin-bottom: 0px;
     font-size: 16;
@@ -32,9 +31,13 @@
     text-decoration: none;
 }
 
-
-.TodoItem button {
+.TodoItem button.editButton {
     margin-left: auto;
+    border: none;
+    background-color: white;
+}
+
+.TodoItem button.closeButton {
     border: none;
     background-color: white;
 }
