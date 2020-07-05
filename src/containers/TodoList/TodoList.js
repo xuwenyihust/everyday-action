@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './TodoList.css';
 import TodoItem from '../../components/TodoItem/TodoItem';
-import TodoHeader from '../../components/TodoItem/TodoHeader/TodoHeader';
+import TodoForm from '../../components/TodoItem/TodoFrom/TodoForm';
 
 class TodoList extends Component {
 
@@ -81,9 +81,7 @@ class TodoList extends Component {
         return (
             <div>
                 <h4>任务清单</h4>
-                <form onSubmit={this.addItemHandler}>
-                    <TodoHeader value={this.state.itemToSubmit.content} inputChanged={this.inputChangeHandler}/>
-                </form>
+                <TodoForm value={this.state.itemToSubmit.content} inputChanged={this.inputChangeHandler} submitted={this.addItemHandler}/>
                 <ul>
                     {items}
                 </ul>
