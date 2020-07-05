@@ -1,10 +1,16 @@
 import React, {Component} from 'react';
 import './TodoList.css';
 import TodoItem from '../../components/TodoItem/TodoItem';
+import TodoHeader from '../../components/TodoItem/TodoHeader/TodoHeader';
 
 class TodoList extends Component {
 
     state = {
+        itemToSubmit: {
+            id: null,
+            content: "新任务",
+            done: false
+        },
         items: [
             {
                 id: 1593920420073,
@@ -24,22 +30,33 @@ class TodoList extends Component {
         ]
     }
 
-    addItem = (event) => {
-        event.preventDefault();
-        let newItemValue = this.refs.itemName.value;
+    inputChangeHandler = (event) => {
+        console.log(event.target.value);
+        const newItemToSubmit = {
+            id: null,
+            content: event.target.value,
+            done: false
+        }
 
-        if(newItemValue) {
+        this.setState({itemToSubmit: newItemToSubmit})
+    }
+
+    addItemHandler = (event) => {
+        event.preventDefault();
+        const itemToSubmit = this.state.itemToSubmit;
+
+        if(itemToSubmit.content) {
             let newItems = [... this.state.items];
             newItems.push({
                 id: Date.now(),
-                content: newItemValue
+                content: itemToSubmit.content,
+                done: false
             });
-
             this.setState({items: newItems});
         }
     }
 
-    removeItem = (itemId) => {
+    removeItemHandler = (itemId) => {
         let updatedItems = this.state.items;
         updatedItems = updatedItems.filter(item => 
                         item.id !== itemId);
@@ -48,7 +65,7 @@ class TodoList extends Component {
         this.setState({items: updatedItems});
     }
 
-    revertItemDone = (itemId) => {
+    revertItemDoneHandler = (itemId) => {
         let updatedItems = this.state.items;
         let updatedItem = updatedItems.find(item => item.id === itemId);
         updatedItem.done = !updatedItem.done;
@@ -58,14 +75,19 @@ class TodoList extends Component {
 
     render () {
         const items = this.state.items.map(item =>{
-            return <TodoItem key={item.id} item={item} contentClicked={this.revertItemDone} closeClicked={this.removeItem}/>
+            return <TodoItem key={item.id} item={item} contentClicked={this.revertItemDoneHandler} closeClicked={this.removeItemHandler}/>
         })
 
         return (
             <div>
                 <h4>任务清单</h4>
-                <form onSubmit={this.addItem}>
-                    <input ref="itemName" placeholder="新任务"></input>
+                <form onSubmit={this.addItemHandler}>
+                    {/* <TodoHeader /> */}
+                    <input 
+                        ref="itemName" 
+                        placeholder="新任务" 
+                        value={this.state.itemToSubmit.content}
+                        onChange={this.inputChangeHandler}></input>
                     <button type="submit">添加</button>
                 </form>
                 <ul>
