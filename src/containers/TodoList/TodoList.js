@@ -35,25 +35,30 @@ class TodoList extends Component {
                 content: newItemValue
             });
 
-            this.setState({items: newItems})
+            this.setState({items: newItems});
         }
     }
 
-    removeItem = () => {
+    removeItem = (itemId) => {
+        let updatedItems = this.state.items;
+        updatedItems = updatedItems.filter(item => 
+                        item.id !== itemId);
+        console.log(updatedItems);
 
+        this.setState({items: updatedItems});
     }
 
     revertItemDone = (itemId) => {
-        let updatedItems = this.state.items
+        let updatedItems = this.state.items;
         let updatedItem = updatedItems.find(item => item.id === itemId);
         updatedItem.done = !updatedItem.done;
 
-        this.setState({items: updatedItems})
+        this.setState({items: updatedItems});
     }
 
     render () {
         const items = this.state.items.map(item =>{
-            return <TodoItem key={item.id} item={item} clicked={this.revertItemDone}/>
+            return <TodoItem key={item.id} item={item} contentClicked={this.revertItemDone} closeClicked={this.removeItem}/>
         })
 
         return (

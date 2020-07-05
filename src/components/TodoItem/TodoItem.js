@@ -5,8 +5,11 @@ const todoItem = (props) => (
     <div className="TodoItem">
         <p 
             className={props.item.done ? 'done' : 'undone'}
-            onClick={() => props.clicked(props.item.id)}>{props.item.content}</p>
-        <button type="button" className="closeButton">&times;</button>
+            onClick={() => props.contentClicked(props.item.id)}>{props.item.content}</p>
+        <button 
+            type="button" 
+            className="closeButton"
+            onClick={() => props.closeClicked(props.item.id)}>&times;</button>
     </div>
 );
 
