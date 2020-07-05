@@ -82,13 +82,13 @@ class TodoList extends Component {
             <div>
                 <h4>任务清单</h4>
                 <form onSubmit={this.addItemHandler}>
-                    {/* <TodoHeader /> */}
-                    <input 
+                    <TodoHeader value={this.state.itemToSubmit.content} inputChanged={this.inputChangeHandler}/>
+                    {/* <input 
                         ref="itemName" 
                         placeholder="新任务" 
                         value={this.state.itemToSubmit.content}
-                        onChange={this.inputChangeHandler}></input>
-                    <button type="submit">添加</button>
+                        onChange={this.inputChangeHandler}></input> */}
+                    {/* <button type="submit">添加</button> */}
                 </form>
                 <ul>
                     {items}

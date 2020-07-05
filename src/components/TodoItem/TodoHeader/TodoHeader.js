@@ -3,7 +3,11 @@ import './TodoHeader.css';
 
 const todoHeader = (props) => (
     <div>
-        <input ref="itemName" placeholder="新任务"></input>
+        <input 
+            placeholder={props.value}
+            value={props.value}
+            onChange={props.inputChanged}></input>
+        <button type="submit">添加</button>
     </div>
 );
 
