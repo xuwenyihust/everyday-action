@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
 import Layout from './components/Layout/Layout';
-import TodoList from './containers/TodoList/TodoList';
+import TodoListBuilder from './containers/TodoListBuilder/TodoListBuilder';
 
 function App() {
   return (
     <div>
       <Layout>
-        <TodoList />
+        <TodoListBuilder />
       </Layout>
     </div>
   );
