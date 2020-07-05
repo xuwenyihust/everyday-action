@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Everyday Action
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +69,6 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+=======
+# everyday-action
+>>>>>>> cb2bcbc06988880d547b12b9baecd78a95c0888d
