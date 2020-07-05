@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './TodoListBuilder.css';
-import TodoItem from '../../components/TodoList/TodoItem/TodoItem';
+import TodoItems from '../../components/TodoList/TodoItems/TodoItems';
 import TodoForm from '../../components/TodoList/TodoForm/TodoForm';
 
 class TodoList extends Component {
@@ -74,17 +74,18 @@ class TodoList extends Component {
     }
 
     render () {
-        const items = this.state.items.map(item =>{
-            return <TodoItem key={item.id} item={item} contentClicked={this.revertItemDoneHandler} closeClicked={this.removeItemHandler}/>
-        })
+        // const items = this.state.items.map(item =>{
+        //     return <TodoItem key={item.id} item={item} contentClicked={this.revertItemDoneHandler} closeClicked={this.removeItemHandler}/>
+        // })
 
         return (
             <div>
                 <h4>任务清单</h4>
                 <TodoForm value={this.state.itemToSubmit.content} inputChanged={this.inputChangeHandler} submitted={this.addItemHandler}/>
-                <ul>
+                <TodoItems items={this.state.items} contentClicked={this.revertItemDoneHandler} closeClicked={this.removeItemHandler}/>
+                {/* <ul>
                     {items}
-                </ul>
+                </ul> */}
             </div>
         )
     }
