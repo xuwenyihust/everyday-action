@@ -9,22 +9,37 @@ class TodoList extends Component {
         itemToSubmit: {
             id: null,
             content: "新任务",
+            type: null,
+            created_timestamp: null,
             done: false
         },
         items: [
             {
                 id: 1593920420073,
+                created_timestamp: 1593920420073,
                 content: "跑步",
+                type: "运动",
                 done: false
             },
             {
                 id: 1593920427447,
+                created_timestamp: 1593920420073,
                 content: "理发",
+                type: "生活",
                 done: false
             },
             {
                 id: 1593920442267,
+                created_timestamp: 1593920420073,
                 content: "洗牙",
+                type: "生活",
+                done: false
+            },
+            {
+                id: 1593988570469,
+                created_timestamp: 1593988570469,
+                content: "读书",
+                type: "学习",
                 done: false
             }
         ]
@@ -34,6 +49,7 @@ class TodoList extends Component {
         console.log(event.target.value);
         const newItemToSubmit = {
             id: null,
+            created_timestamp: null,
             content: event.target.value,
             done: false
         }
@@ -49,6 +65,7 @@ class TodoList extends Component {
             let newItems = [... this.state.items];
             newItems.push({
                 id: Date.now(),
+                created_timestamp: Date.now(),
                 content: itemToSubmit.content,
                 done: false
             });
@@ -74,12 +91,8 @@ class TodoList extends Component {
     }
 
     render () {
-        // const items = this.state.items.map(item =>{
-        //     return <TodoItem key={item.id} item={item} contentClicked={this.revertItemDoneHandler} closeClicked={this.removeItemHandler}/>
-        // })
-
         return (
-            <div>
+            <div className='TodoListBuilder'>
                 <h4>任务清单</h4>
                 <TodoForm value={this.state.itemToSubmit.content} inputChanged={this.inputChangeHandler} submitted={this.addItemHandler}/>
                 <TodoItems items={this.state.items} contentClicked={this.revertItemDoneHandler} closeClicked={this.removeItemHandler}/>
