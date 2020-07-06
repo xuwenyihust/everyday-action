@@ -3,7 +3,8 @@ import './TodoItemSummary.css';
 
 const todoItemSummary = (props) => (
     <div>
-        <p>{props.item.content}</p>
+        <h3>{props.item.content}</h3>
+        <p>类别： <strong>{props.item.type}</strong></p>
         <button
             type="button" 
             className="saveButton"
