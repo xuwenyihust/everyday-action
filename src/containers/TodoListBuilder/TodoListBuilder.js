@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import './TodoListBuilder.css';
 import TodoItems from '../../components/TodoList/TodoItems/TodoItems';
 import TodoForm from '../../components/TodoList/TodoForm/TodoForm';
+import TodoItemSummary from '../../components/TodoList/TodoItems/TodoItem/TodoItemSummary/TodoItemSummary';
+import Modal from '../../components/UI/Modal/Modal';
 
 class TodoList extends Component {
 
@@ -42,7 +44,10 @@ class TodoList extends Component {
                 type: "学习",
                 done: false
             }
-        ]
+        ],
+
+        editingItem: false,
+        itemUnderEditing: {}
     }
 
     inputChangeHandler = (event) => {
@@ -77,13 +82,17 @@ class TodoList extends Component {
         let updatedItems = this.state.items;
         updatedItems = updatedItems.filter(item => 
                         item.id !== itemId);
-        console.log(updatedItems);
 
         this.setState({items: updatedItems});
     }
 
     editItemHandler = (itemId) => {
-        console.log(itemId);
+        const itemUnderEditing = this.state.items.find(item => item.id === itemId);
+
+        this.setState({
+            editingItem: true,
+            itemUnderEditing: itemUnderEditing
+        })
     }
 
     revertItemDoneHandler = (itemId) => {
@@ -94,9 +103,30 @@ class TodoList extends Component {
         this.setState({items: updatedItems});
     }
 
+    editItemSaveHandler = () => {
+        this.setState({
+            editingItem: false,
+            itemUnderEditing: {}
+        })
+    }
+
+    editItemCancelHandler = () => {
+        this.setState({
+            editingItem: false,
+            itemUnderEditing: {}
+        })
+    }
+
     render () {
         return (
             <div className='TodoListBuilder'>
+                <Modal show={this.state.editingItem}>
+                    <TodoItemSummary 
+                        item={this.state.itemUnderEditing}
+                        saveClicked={this.editItemSaveHandler}
+                        cancelClicked={this.editItemCancelHandler}/>
+                </Modal>
+
                 <h4>任务清单</h4>
                 <TodoForm value={this.state.itemToSubmit.content} inputChanged={this.inputChangeHandler} submitted={this.addItemHandler}/>
                 <TodoItems 
