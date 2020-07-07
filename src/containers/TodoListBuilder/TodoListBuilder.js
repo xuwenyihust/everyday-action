@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './TodoListBuilder.css';
 import TodoItems from '../../components/TodoList/TodoItems/TodoItems';
 import TodoForm from '../../components/TodoList/TodoForm/TodoForm';
-import TodoItemSummary from '../../components/TodoList/TodoItems/TodoItem/TodoItemSummary/TodoItemSummary';
+import TodoItemSummary from '../TodoItemSummary/TodoItemSummary';
 import Modal from '../../components/UI/Modal/Modal';
 
 class TodoList extends Component {
@@ -117,18 +117,26 @@ class TodoList extends Component {
         })
     }
 
+    itemSummaryContentEditHandler = (event) => {
+        console.log(event.target);
+    }
+
     render () {
         return (
             <div className='TodoListBuilder'>
                 <Modal show={this.state.editingItem}>
                     <TodoItemSummary 
                         item={this.state.itemUnderEditing}
+                        itemSummaryContentChanged={this.itemSummaryContentEditHandler}
                         saveClicked={this.editItemSaveHandler}
                         cancelClicked={this.editItemCancelHandler}/>
                 </Modal>
 
                 <h4>任务清单</h4>
-                <TodoForm value={this.state.itemToSubmit.content} inputChanged={this.inputChangeHandler} submitted={this.addItemHandler}/>
+                <TodoForm 
+                    value={this.state.itemToSubmit.content} 
+                    inputChanged={this.inputChangeHandler} 
+                    submitted={this.addItemHandler}/>
                 <TodoItems 
                     items={this.state.items} 
                     contentClicked={this.revertItemDoneHandler} 

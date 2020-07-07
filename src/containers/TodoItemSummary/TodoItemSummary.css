@@ -1,0 +1,52 @@
+.TodoItemSummary {
+    display: block;
+
+    padding: 10px;
+}
+
+.TodoItemSummary form {
+    width: 100%;
+    padding: 10px;
+    display: inline-block;
+    box-sizing: border-box;
+    margin-left: 30px;
+}
+
+/* .TodoItemSummary div.content {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.TodoItemSummary div.type {
+    margin-top: 5px;
+    margin-bottom: 5px;
+} */
+
+.TodoItemSummary button {
+    margin-top: 10px;
+    margin-bottom: 5px;
+
+    padding: 14px 28px;
+
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.TodoItemSummary button.saveButton {
+    background-color: #4CAF50;
+}
+
+.TodoItemSummary button.saveButton:hover {
+    background-color: #46a049;
+}
+
+.TodoItemSummary button.cancelButton {
+    color: black;
+    background-color: #e7e7e7;
+}
+
+.TodoItemSummary button.cancelButton:hover {
+    background-color: #ddd;
+}
