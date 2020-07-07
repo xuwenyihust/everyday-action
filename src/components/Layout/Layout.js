@@ -1,11 +1,12 @@
 import React from 'react';
 import './Layout.css';
+import Navigation from '../Navigation/Navigation';
 
 const layout = (props) => {
 
     return (
         <div>
-            <div>Nav</div>
+            <Navigation />
             <main className="Content">
                 {props.children}
             </main>

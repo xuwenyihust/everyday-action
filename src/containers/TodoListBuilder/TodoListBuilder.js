@@ -26,8 +26,8 @@ class TodoList extends Component {
             {
                 id: 1593920427447,
                 created_timestamp: 1593920420073,
-                content: "理发",
-                type: "生活",
+                content: "混合有氧",
+                type: "运动",
                 done: false
             },
             {
@@ -40,7 +40,7 @@ class TodoList extends Component {
             {
                 id: 1593988570469,
                 created_timestamp: 1593988570469,
-                content: "读书",
+                content: "看书",
                 type: "学习",
                 done: false
             }

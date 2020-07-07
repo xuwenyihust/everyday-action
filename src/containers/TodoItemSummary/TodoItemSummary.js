@@ -8,7 +8,6 @@ class TodoItemSummary extends Component {
     }
 
     itemSummaryContentChangeHandler = (event) => {
-        // console.log(event.target.value);
         let itemUnderChange;
         if (this.state.item === null) {
             itemUnderChange = this.props.item;
@@ -17,6 +16,19 @@ class TodoItemSummary extends Component {
         }
 
         itemUnderChange.content = event.target.value;
+        console.log(itemUnderChange);
+        this.setState({item: itemUnderChange})
+    }
+
+    itemSummaryTypeChangeHandler = (event) => {
+        let itemUnderChange;
+        if (this.state.item === null) {
+            itemUnderChange = this.props.item;
+        } else {
+            itemUnderChange = this.state.item;
+        }
+
+        itemUnderChange.type = event.target.value;
         console.log(itemUnderChange);
         this.setState({item: itemUnderChange})
     }
@@ -45,7 +57,7 @@ class TodoItemSummary extends Component {
                     <label>类别：</label>
                     <input 
                         value={item.type}
-                        ></input>
+                        onChange={this.itemSummaryTypeChangeHandler}></input>
                 </form>
 
                 <button
