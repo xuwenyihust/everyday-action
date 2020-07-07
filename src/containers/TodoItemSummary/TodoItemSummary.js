@@ -55,9 +55,12 @@ class TodoItemSummary extends Component {
 
                 <form>
                     <label>类别：</label>
-                    <input 
-                        value={item.type}
-                        onChange={this.itemSummaryTypeChangeHandler}></input>
+                    <select
+                        onChange={this.itemSummaryTypeChangeHandler}>
+                        <option value="运动">运动</option>
+                        <option value="生活">生活</option>
+                        <option value="学习">学习</option>
+                    </select>
                 </form>
 
                 <button
