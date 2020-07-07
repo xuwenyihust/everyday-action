@@ -15,6 +15,9 @@ class TodoList extends Component {
             created_timestamp: null,
             done: false
         },
+
+        itemTypes: ["运动", "生活", "学习", "工作", "娱乐"],
+
         items: [
             {
                 id: 1593920420073,
@@ -126,6 +129,7 @@ class TodoList extends Component {
             <div className='TodoListBuilder'>
                 <Modal show={this.state.editingItem}>
                     <TodoItemSummary 
+                        itemTypes={this.state.itemTypes}
                         item={this.state.itemUnderEditing}
                         itemSummaryContentChanged={this.itemSummaryContentEditHandler}
                         saveClicked={this.editItemSaveHandler}
