@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/everyday-action/static/css/main.6e4abbc8.chunk.css",
+    "main.js": "/everyday-action/static/js/main.4dd54203.chunk.js",
+    "main.js.map": "/everyday-action/static/js/main.4dd54203.chunk.js.map",
+    "runtime-main.js": "/everyday-action/static/js/runtime-main.ff8f844e.js",
+    "runtime-main.js.map": "/everyday-action/static/js/runtime-main.ff8f844e.js.map",
+    "static/js/2.f02bf629.chunk.js": "/everyday-action/static/js/2.f02bf629.chunk.js",
+    "static/js/2.f02bf629.chunk.js.map": "/everyday-action/static/js/2.f02bf629.chunk.js.map",
+    "index.html": "/everyday-action/index.html",
+    "precache-manifest.9294ae41fd9f7163ca01d5c4d7c8bf8f.js": "/everyday-action/precache-manifest.9294ae41fd9f7163ca01d5c4d7c8bf8f.js",
+    "service-worker.js": "/everyday-action/service-worker.js",
+    "static/css/main.6e4abbc8.chunk.css.map": "/everyday-action/static/css/main.6e4abbc8.chunk.css.map",
+    "static/js/2.f02bf629.chunk.js.LICENSE.txt": "/everyday-action/static/js/2.f02bf629.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ff8f844e.js",
+    "static/js/2.f02bf629.chunk.js",
+    "static/css/main.6e4abbc8.chunk.css",
+    "static/js/main.4dd54203.chunk.js"
+  ]
+}
