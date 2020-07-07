@@ -3,27 +3,26 @@ import './TodoItemSummary.css';
 
 class TodoItemSummary extends Component {
 
-    // constructor(props) {
-    //     super(props);
-    //     console.log(props.item);
-
-    //     this.state = {
-    //         item: this.props.item
-    //     }
-    // }
-
     state = {
         item: null
     }
-    // itemEditHandler = (item) => {
-    //     this.setState({
-    //         item: item
-    //     });
-    // }
+
+    itemSummaryContentChangeHandler = (event) => {
+        // console.log(event.target.value);
+        let itemUnderChange;
+        if (this.state.item === null) {
+            itemUnderChange = this.props.item;
+        } else {
+            itemUnderChange = this.state.item;
+        }
+
+        itemUnderChange.content = event.target.value;
+        console.log(itemUnderChange);
+        this.setState({item: itemUnderChange})
+    }
 
     render () {
         
-        console.log(this.state.item);
         let item = null;
 
         if (this.state.item === null) {
@@ -39,7 +38,7 @@ class TodoItemSummary extends Component {
                     <label>内容：</label>
                     <input 
                         value={item.content}
-                        onChange={this.props.itemSummaryContentChanged}></input>
+                        onChange={this.itemSummaryContentChangeHandler}></input>
                 </form>
 
                 <form>
