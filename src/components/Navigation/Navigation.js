@@ -1,11 +1,12 @@
 import React from 'react';
 import './Navigation.css';
+import NavigationItems from './NavigationItems/NavigationItems';
 
 const navigation = () => (
     <header className='Navigation'>
         {/* <div>MENU</div> */}
         <nav>
-            <div>Wow</div>
+            <NavigationItems />
         </nav>
     </header>
 );
