@@ -22,29 +22,24 @@
     border-color:  rgba(0, 0, 0, 0.1);
 }
 
-.TodoItemSummary form Select {
+.TodoItemSummary form select {
     padding: 8px 16px;
     border: 1px solid transparent;
     border-color:  rgba(0, 0, 0, 0.1);
     cursor: pointer;
 }
 
-.TodoItemSummary form Select div,.select-selected {
+.TodoItemSummary form select option {
+    border: 1px solid transparent;
+    border-color:  rgba(0, 0, 0, 0.1);
+}
+
+/* .TodoItemSummary form select.select-selected {
     padding: 8px 16px;
     border: 1px solid transparent;
     border-color:  rgba(0, 0, 0, 0.1);
     cursor: pointer;
     user-select: none;
-}
-
-/* .TodoItemSummary div.content {
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-.TodoItemSummary div.type {
-    margin-top: 5px;
-    margin-bottom: 5px;
 } */
 
 .TodoItemSummary button {

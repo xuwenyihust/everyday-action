@@ -14,6 +14,14 @@
     text-align: left;
 }
 
+.TodoItem svg.MuiSvgIcon-root {
+    margin-right: 10px;
+}
+
+.TodoItem span.material-icons {
+    margin-right: 10px;
+}
+
 .TodoItem p {
     /* display: inline-block; */
     margin-top: 0px;
