@@ -22,14 +22,14 @@
     border-color:  rgba(0, 0, 0, 0.1);
 }
 
-.TodoItemSummary form select {
+.TodoItemSummary form Select {
     padding: 8px 16px;
     border: 1px solid transparent;
     border-color:  rgba(0, 0, 0, 0.1);
     cursor: pointer;
 }
 
-.TodoItemSummary form select div,.select-selected {
+.TodoItemSummary form Select div,.select-selected {
     padding: 8px 16px;
     border: 1px solid transparent;
     border-color:  rgba(0, 0, 0, 0.1);

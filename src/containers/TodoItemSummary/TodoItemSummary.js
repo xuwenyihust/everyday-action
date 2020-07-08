@@ -35,18 +35,20 @@ class TodoItemSummary extends Component {
 
     render () {
         
-        let item = null;
-
-        if (this.state.item === null) {
-            item = this.props.item
-        } else {
-            item = this.state.item
-        }
+        const item = this.props.item;
 
         const itemTypes = this.props.itemTypes;
-        const itemTypeOptions = itemTypes.map(t =>
-            <option key={t} value={t}>{t}</option>
-        )
+        const itemTypeOptions = itemTypes.map(t => {
+            if (item.type === t) {
+                return (
+                    <option key={t} value={t} selected="selected">{t}</option>
+                )
+            } else {
+                return (
+                    <option key={t} value={t}>{t}</option>
+                )
+            }
+        });
 
         return (
             <div className='TodoItemSummary'>
@@ -62,9 +64,6 @@ class TodoItemSummary extends Component {
                     <label>类别：</label>
                     <select
                         onChange={this.itemSummaryTypeChangeHandler}>
-                        {/* <option value="运动">运动</option>
-                        <option value="生活">生活</option>
-                        <option value="学习">学习</option> */}
                         {itemTypeOptions}
                     </select>
                 </form>
