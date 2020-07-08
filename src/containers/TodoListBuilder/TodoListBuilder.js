@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './TodoListBuilder.css';
 import TodoItems from '../../components/TodoList/TodoItems/TodoItems';
 import TodoForm from '../../components/TodoList/TodoForm/TodoForm';
-import TodoItemSummary from '../TodoItemSummary/TodoItemSummary';
+import TodoItemSummary from '../../components/TodoList/TodoItems/TodoItem/TodoItemSummary/TodoItemSummary';
 import Modal from '../../components/UI/Modal/Modal';
 
 class TodoList extends Component {
@@ -54,7 +54,6 @@ class TodoList extends Component {
     }
 
     inputChangeHandler = (event) => {
-        console.log(event.target.value);
         const newItemToSubmit = {
             id: null,
             created_timestamp: null,
@@ -82,46 +81,65 @@ class TodoList extends Component {
     }
 
     removeItemHandler = (itemId) => {
-        let updatedItems = this.state.items;
-        updatedItems = updatedItems.filter(item => 
-                        item.id !== itemId);
+        const items = [... this.state.items]
+        const updatedItems = items.filter(item => 
+                                item.id !== itemId);
 
         this.setState({items: updatedItems});
     }
 
     editItemHandler = (itemId) => {
-        const itemUnderEditing = this.state.items.find(item => item.id === itemId);
+        const items = [... this.state.items]
+        const itemUnderEditing = items.find(item => item.id === itemId);
 
         this.setState({
             editingItem: true,
-            itemUnderEditing: itemUnderEditing
+            itemUnderEditing: {... itemUnderEditing}
         })
     }
 
     revertItemDoneHandler = (itemId) => {
-        let updatedItems = this.state.items;
+        let updatedItems = [... this.state.items];
         let updatedItem = updatedItems.find(item => item.id === itemId);
         updatedItem.done = !updatedItem.done;
 
         this.setState({items: updatedItems});
     }
 
-    editItemSaveHandler = () => {
+    itemSummaryContentChangeHandler = (event) => {
+        let itemUnderEditing = this.state.itemUnderEditing;
+        itemUnderEditing.content = event.target.value;
+
+        this.setState({itemUnderEditing: itemUnderEditing})
+    }
+
+    itemSummaryTypeChangeHandler = (event) => {
+        let itemUnderEditing = this.state.itemUnderEditing;
+        itemUnderEditing.type = event.target.value;
+
+        this.setState({itemUnderEditing: itemUnderEditing})
+    }
+
+    editItemSaveHandler = (item) => {
+        let items = [... this.state.items];
+        const previousItem = items.find(i =>
+            i.id === item.id);
+        const previousItemIndex = items.indexOf(previousItem);
+        items[previousItemIndex] = item;
+        
         this.setState({
+            items: items,
             editingItem: false,
             itemUnderEditing: {}
         })
     }
 
     editItemCancelHandler = () => {
+
         this.setState({
             editingItem: false,
             itemUnderEditing: {}
         })
-    }
-
-    itemSummaryContentEditHandler = (event) => {
-        console.log(event.target);
     }
 
     render () {
@@ -131,7 +149,8 @@ class TodoList extends Component {
                     <TodoItemSummary 
                         itemTypes={this.state.itemTypes}
                         item={this.state.itemUnderEditing}
-                        itemSummaryContentChanged={this.itemSummaryContentEditHandler}
+                        itemSummaryContentChanged={this.itemSummaryContentChangeHandler}
+                        itemSummaryTypeChanged={this.itemSummaryTypeChangeHandler}
                         saveClicked={this.editItemSaveHandler}
                         cancelClicked={this.editItemCancelHandler}/>
                 </Modal>
