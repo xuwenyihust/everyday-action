@@ -18,36 +18,67 @@ class TodoList extends Component {
 
         itemTypes: ["运动", "生活", "学习", "工作", "娱乐"],
 
-        items: [
-            {
+        // items: [
+        //     {
+        //         id: 1593920420073,
+        //         created_timestamp: 1593920420073,
+        //         content: "跑步",
+        //         type: "运动",
+        //         done: false
+        //     },
+        //     {
+        //         id: 1593920427447,
+        //         created_timestamp: 1593920420073,
+        //         content: "混合有氧",
+        //         type: "运动",
+        //         done: false
+        //     },
+        //     {
+        //         id: 1593920442267,
+        //         created_timestamp: 1593920420073,
+        //         content: "洗牙",
+        //         type: "生活",
+        //         done: false
+        //     },
+        //     {
+        //         id: 1593988570469,
+        //         created_timestamp: 1593988570469,
+        //         content: "看书",
+        //         type: "学习",
+        //         done: false
+        //     }
+        // ],
+
+        items: {
+            1593920420073: {
                 id: 1593920420073,
                 created_timestamp: 1593920420073,
                 content: "跑步",
                 type: "运动",
                 done: false
             },
-            {
+            1593920427447: {
                 id: 1593920427447,
                 created_timestamp: 1593920420073,
                 content: "混合有氧",
                 type: "运动",
                 done: false
             },
-            {
+            1593920442267: {
                 id: 1593920442267,
                 created_timestamp: 1593920420073,
                 content: "洗牙",
                 type: "生活",
                 done: false
             },
-            {
+            1593988570469: {
                 id: 1593988570469,
                 created_timestamp: 1593988570469,
                 content: "看书",
                 type: "学习",
                 done: false
             }
-        ],
+        },
 
         editingItem: false,
         itemUnderEditing: {}
@@ -69,28 +100,30 @@ class TodoList extends Component {
         const itemToSubmit = this.state.itemToSubmit;
 
         if(itemToSubmit.content) {
-            let newItems = [... this.state.items];
-            newItems.push({
-                id: Date.now(),
-                created_timestamp: Date.now(),
+            let newItems = {... this.state.items};
+            const newId = Date.now()
+            const newItem = {
+                id: newId,
+                created_timestamp: newId,
                 content: itemToSubmit.content,
                 done: false
-            });
+            }
+
+            newItems[newId] = newItem;
             this.setState({items: newItems});
         }
     }
 
     removeItemHandler = (itemId) => {
-        const items = [... this.state.items]
-        const updatedItems = items.filter(item => 
-                                item.id !== itemId);
+        let updatedItems = {... this.state.items}
+        delete updatedItems[itemId];
 
         this.setState({items: updatedItems});
     }
 
     editItemHandler = (itemId) => {
-        const items = [... this.state.items]
-        const itemUnderEditing = items.find(item => item.id === itemId);
+        const items = {... this.state.items}
+        const itemUnderEditing = items[itemId];
 
         this.setState({
             editingItem: true,
@@ -99,8 +132,8 @@ class TodoList extends Component {
     }
 
     revertItemDoneHandler = (itemId) => {
-        let updatedItems = [... this.state.items];
-        let updatedItem = updatedItems.find(item => item.id === itemId);
+        let updatedItems = {... this.state.items};
+        let updatedItem = updatedItems[itemId];
         updatedItem.done = !updatedItem.done;
 
         this.setState({items: updatedItems});
@@ -121,11 +154,8 @@ class TodoList extends Component {
     }
 
     editItemSaveHandler = (item) => {
-        let items = [... this.state.items];
-        const previousItem = items.find(i =>
-            i.id === item.id);
-        const previousItemIndex = items.indexOf(previousItem);
-        items[previousItemIndex] = item;
+        let items = {... this.state.items};
+        items[item.id] = item;
         
         this.setState({
             items: items,
