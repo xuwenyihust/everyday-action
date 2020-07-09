@@ -4,10 +4,11 @@ import TodoItem from './TodoItem/TodoItem';
 
 const todoItems = (props) => {
 
-    const items = props.items.map(item =>{
+    const itemObjects = props.items;
+    const items = Object.keys(itemObjects).map(itemKey => {
         return <TodoItem 
-                    key={item.id} 
-                    item={item} 
+                    key={itemObjects[itemKey].id} 
+                    item={itemObjects[itemKey]} 
                     contentClicked={props.contentClicked} 
                     editClicked={props.editClicked} 
                     closeClicked={props.closeClicked}/>
