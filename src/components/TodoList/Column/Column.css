@@ -1,0 +1,10 @@
+.Column {
+    width: 100%;
+
+    margin-left: 2%;
+    border: 2px solid rgba(182, 182, 182, 0.219);
+}
+
+.Column h4 {
+    text-align: center;
+}

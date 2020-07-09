@@ -45,7 +45,7 @@ const todoItem = (props) => {
             <button 
                 type="button" 
                 className="closeButton"
-                onClick={() => props.closeClicked(props.item.id)}><i className="fa fa-close"></i></button>
+                onClick={() => props.closeClicked(props.item.id, props.columnId)}><i className="fa fa-close"></i></button>
         </div>
     );
 };

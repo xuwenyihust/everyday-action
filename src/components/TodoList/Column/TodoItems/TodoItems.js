@@ -7,6 +7,7 @@ const todoItems = (props) => {
     const itemObjects = props.items;
     const items = Object.keys(itemObjects).map(itemKey => {
         return <TodoItem 
+                    columnId={props.columnId}
                     key={itemObjects[itemKey].id} 
                     item={itemObjects[itemKey]} 
                     contentClicked={props.contentClicked} 
@@ -16,6 +17,7 @@ const todoItems = (props) => {
 
     return (
         <div className="TodoItems">
+            <h4>{props.key}</h4>
             <ul>
                 {items}
             </ul>
