@@ -1,4 +1,5 @@
 # Everyday Action
+![GitHub issues](https://img.shields.io/github/issues/xuwenyihust/everyday-action)
 
 ## Summary
 
