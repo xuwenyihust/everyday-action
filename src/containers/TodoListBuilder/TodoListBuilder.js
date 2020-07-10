@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './TodoListBuilder.css';
 import initialData from '../../initialData';
+import { DragDropContext } from 'react-beautiful-dnd';
 import Column from '../../components/TodoList/Column/Column';
 import TodoItemSummary from '../../components/TodoList/Column/TodoItems/TodoItem/TodoItemSummary/TodoItemSummary';
 import Modal from '../../components/UI/Modal/Modal';
@@ -8,6 +9,72 @@ import Modal from '../../components/UI/Modal/Modal';
 class TodoList extends Component {
 
     state = initialData;
+
+    onDragEnd = (result) => {
+        const { destination, source, draggableId } = result;
+
+        if (!destination) {
+            return;
+        }
+
+        if (destination.droppableId === source.droppableId &&
+            destination.index === source.index) {
+            return;
+        }
+
+        if (destination.droppableId === source.droppableId) {
+
+            const column = this.state.columns[source.droppableId];
+            const newTaskIds = Array.from(column.taskIds);
+            newTaskIds.splice(source.index, 1)
+            newTaskIds.splice(destination.index, 0, draggableId)
+
+            const newColumn = {
+                ... column,
+                taskIds: newTaskIds
+            };
+
+            const newState = {
+                ...this.state,
+                columns: {
+                    ...this.state.columns,
+                    [newColumn.id]: newColumn
+                }
+            };
+
+            this.setState(newState);
+        } else {
+
+            const sourceColumn = this.state.columns[source.droppableId];
+            const destinationColumn = this.state.columns[destination.droppableId];
+            const newSourceTaskIds = Array.from(sourceColumn.taskIds);
+            const newDestinationTaskIds = Array.from(destinationColumn.taskIds);
+
+            newSourceTaskIds.splice(source.index, 1)
+            newDestinationTaskIds.splice(destination.index, 0, draggableId)
+
+            const newSourceColumn = {
+                ... sourceColumn,
+                taskIds: newSourceTaskIds
+            };
+            const newDestinationColumn = {
+                ... destinationColumn,
+                taskIds: newDestinationTaskIds
+            };
+
+            const newState = {
+                ...this.state,
+                columns: {
+                    ...this.state.columns,
+                    [newSourceColumn.id]: newSourceColumn,
+                    [newDestinationColumn.id]: newDestinationColumn
+                }
+            };
+
+            this.setState(newState);
+        }
+
+    }
 
     formInputChangeHandler = (event, columnId) => {
         let columns = this.state.columns;
@@ -53,6 +120,8 @@ class TodoList extends Component {
 
     removeItemHandler = (itemId, columnId) => {
         // Need to remove from both  items & columns.taskIds
+        console.log(columnId)
+
         let updatedItems = {... this.state.items};
         delete updatedItems[itemId];
 
@@ -127,6 +196,7 @@ class TodoList extends Component {
             const items = column.taskIds.map(taskId => this.state.items[taskId]);
 
             return <Column 
+                        key={column.id}
                         column={column}
                         formInputChanged={this.formInputChangeHandler} 
                         submitted={this.addItemHandler}
@@ -148,8 +218,10 @@ class TodoList extends Component {
                         cancelClicked={this.editItemCancelHandler}/>
                 </Modal>
 
-                {columns}
-                
+                <DragDropContext
+                    onDragEnd={this.onDragEnd}>
+                    {columns}
+                </DragDropContext>
             </div>
         )
     }
