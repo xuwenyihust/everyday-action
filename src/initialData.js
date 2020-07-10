@@ -56,10 +56,22 @@ const initialData = {
                 created_timestamp: null,
                 done: false
             },
+        },
+        'column-3': {
+            id: 'column-3',
+            title: '完成',
+            taskIds: [],
+            itemToSubmit: {
+                id: null,
+                content: "新任务",
+                type: null,
+                created_timestamp: null,
+                done: false
+            },
         }
     },
 
-    columnOrder: ['column-1', 'column-2'],
+    columnOrder: ['column-1', 'column-2', 'column-3'],
 
     editingItem: false,
     itemUnderEditing: {}
