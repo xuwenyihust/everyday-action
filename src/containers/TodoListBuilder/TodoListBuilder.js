@@ -1,103 +1,102 @@
 import React, {Component} from 'react';
 import './TodoListBuilder.css';
-import TodoItems from '../../components/TodoList/TodoItems/TodoItems';
-import TodoForm from '../../components/TodoList/TodoForm/TodoForm';
-import TodoItemSummary from '../../components/TodoList/TodoItems/TodoItem/TodoItemSummary/TodoItemSummary';
+import initialData from '../../initialData';
+import { DragDropContext } from 'react-beautiful-dnd';
+import Column from '../../components/TodoList/Column/Column';
+import TodoItemSummary from '../../components/TodoList/Column/TodoItems/TodoItem/TodoItemSummary/TodoItemSummary';
 import Modal from '../../components/UI/Modal/Modal';
 
 class TodoList extends Component {
 
-    state = {
-        itemToSubmit: {
-            id: null,
-            content: "新任务",
-            type: null,
-            created_timestamp: null,
-            done: false
-        },
+    state = initialData;
 
-        itemTypes: ["运动", "生活", "学习", "工作", "娱乐"],
+    onDragEnd = (result) => {
+        const { destination, source, draggableId } = result;
 
-        // items: [
-        //     {
-        //         id: 1593920420073,
-        //         created_timestamp: 1593920420073,
-        //         content: "跑步",
-        //         type: "运动",
-        //         done: false
-        //     },
-        //     {
-        //         id: 1593920427447,
-        //         created_timestamp: 1593920420073,
-        //         content: "混合有氧",
-        //         type: "运动",
-        //         done: false
-        //     },
-        //     {
-        //         id: 1593920442267,
-        //         created_timestamp: 1593920420073,
-        //         content: "洗牙",
-        //         type: "生活",
-        //         done: false
-        //     },
-        //     {
-        //         id: 1593988570469,
-        //         created_timestamp: 1593988570469,
-        //         content: "看书",
-        //         type: "学习",
-        //         done: false
-        //     }
-        // ],
+        if (!destination) {
+            return;
+        }
 
-        items: {
-            1593920420073: {
-                id: 1593920420073,
-                created_timestamp: 1593920420073,
-                content: "跑步",
-                type: "运动",
-                done: false
-            },
-            1593920427447: {
-                id: 1593920427447,
-                created_timestamp: 1593920420073,
-                content: "混合有氧",
-                type: "运动",
-                done: false
-            },
-            1593920442267: {
-                id: 1593920442267,
-                created_timestamp: 1593920420073,
-                content: "洗牙",
-                type: "生活",
-                done: false
-            },
-            1593988570469: {
-                id: 1593988570469,
-                created_timestamp: 1593988570469,
-                content: "看书",
-                type: "学习",
-                done: false
-            }
-        },
+        if (destination.droppableId === source.droppableId &&
+            destination.index === source.index) {
+            return;
+        }
 
-        editingItem: false,
-        itemUnderEditing: {}
+        if (destination.droppableId === source.droppableId) {
+
+            const column = this.state.columns[source.droppableId];
+            const newTaskIds = Array.from(column.taskIds);
+            newTaskIds.splice(source.index, 1)
+            newTaskIds.splice(destination.index, 0, draggableId)
+
+            const newColumn = {
+                ... column,
+                taskIds: newTaskIds
+            };
+
+            const newState = {
+                ...this.state,
+                columns: {
+                    ...this.state.columns,
+                    [newColumn.id]: newColumn
+                }
+            };
+
+            this.setState(newState);
+        } else {
+
+            const sourceColumn = this.state.columns[source.droppableId];
+            const destinationColumn = this.state.columns[destination.droppableId];
+            const newSourceTaskIds = Array.from(sourceColumn.taskIds);
+            const newDestinationTaskIds = Array.from(destinationColumn.taskIds);
+
+            newSourceTaskIds.splice(source.index, 1)
+            newDestinationTaskIds.splice(destination.index, 0, draggableId)
+
+            const newSourceColumn = {
+                ... sourceColumn,
+                taskIds: newSourceTaskIds
+            };
+            const newDestinationColumn = {
+                ... destinationColumn,
+                taskIds: newDestinationTaskIds
+            };
+
+            const newState = {
+                ...this.state,
+                columns: {
+                    ...this.state.columns,
+                    [newSourceColumn.id]: newSourceColumn,
+                    [newDestinationColumn.id]: newDestinationColumn
+                }
+            };
+
+            this.setState(newState);
+        }
+
     }
 
-    inputChangeHandler = (event) => {
+    formInputChangeHandler = (event, columnId) => {
+        let columns = this.state.columns;
+        let column = {... columns[columnId]};
         const newItemToSubmit = {
             id: null,
             created_timestamp: null,
             content: event.target.value,
             done: false
         }
+        column.itemToSubmit = newItemToSubmit;
+        columns[columnId] = column;
 
-        this.setState({itemToSubmit: newItemToSubmit})
+        this.setState({columns: columns})
     }
 
-    addItemHandler = (event) => {
+    addItemHandler = (event, columnId) => {
         event.preventDefault();
-        const itemToSubmit = this.state.itemToSubmit;
+
+        let columns = this.state.columns;
+        let column = {... columns[columnId]};
+        const itemToSubmit = column.itemToSubmit;
 
         if(itemToSubmit.content) {
             let newItems = {... this.state.items};
@@ -109,16 +108,35 @@ class TodoList extends Component {
                 done: false
             }
 
+            column.taskIds.push(newItem.id);
+            columns[columnId] = column;
+
             newItems[newId] = newItem;
-            this.setState({items: newItems});
+            this.setState({
+                items: newItems,
+                columns: columns});
         }
     }
 
-    removeItemHandler = (itemId) => {
-        let updatedItems = {... this.state.items}
+    removeItemHandler = (itemId, columnId) => {
+        // Need to remove from both  items & columns.taskIds
+        console.log(columnId)
+
+        let updatedItems = {... this.state.items};
         delete updatedItems[itemId];
 
-        this.setState({items: updatedItems});
+        let columns = this.state.columns;
+        let updatedColumn = {... columns[columnId]};
+        const updatedTaskIds = updatedColumn.taskIds.filter(id =>
+            id !== itemId 
+        );
+        updatedColumn.taskIds = updatedTaskIds;
+        columns[columnId] = updatedColumn;
+
+        this.setState({
+            items: updatedItems,
+            columns: columns
+        });
     }
 
     editItemHandler = (itemId) => {
@@ -173,6 +191,21 @@ class TodoList extends Component {
     }
 
     render () {
+        const columns = this.state.columnOrder.map(columnId => {
+            const column = this.state.columns[columnId];
+            const items = column.taskIds.map(taskId => this.state.items[taskId]);
+
+            return <Column 
+                        key={column.id}
+                        column={column}
+                        formInputChanged={this.formInputChangeHandler} 
+                        submitted={this.addItemHandler}
+                        items={items} 
+                        contentClicked={this.revertItemDoneHandler} 
+                        editClicked={this.editItemHandler}
+                        closeClicked={this.removeItemHandler}/>
+        })
+
         return (
             <div className='TodoListBuilder'>
                 <Modal show={this.state.editingItem}>
@@ -185,16 +218,10 @@ class TodoList extends Component {
                         cancelClicked={this.editItemCancelHandler}/>
                 </Modal>
 
-                <h4>任务清单</h4>
-                <TodoForm 
-                    value={this.state.itemToSubmit.content} 
-                    inputChanged={this.inputChangeHandler} 
-                    submitted={this.addItemHandler}/>
-                <TodoItems 
-                    items={this.state.items} 
-                    contentClicked={this.revertItemDoneHandler} 
-                    editClicked={this.editItemHandler}
-                    closeClicked={this.removeItemHandler}/>
+                <DragDropContext
+                    onDragEnd={this.onDragEnd}>
+                    {columns}
+                </DragDropContext>
             </div>
         )
     }
