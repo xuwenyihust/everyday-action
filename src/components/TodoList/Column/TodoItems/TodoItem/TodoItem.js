@@ -38,8 +38,8 @@ class todoItem extends Component {
             <Draggable
                 draggableId={this.props.item.id.toString()}
                 index={this.props.index}>
-                    {(provided) => (
-                        <div className="TodoItem"
+                    {(provided, snapshot) => (
+                        <div className={`TodoItem isDragging_${snapshot.isDragging}`}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                             ref={provided.innerRef}

@@ -33,7 +33,7 @@ class column extends Component {
                     submitted={(e) => this.props.submitted(e, this.props.column.id)}/>
                 <Droppable 
                     droppableId={this.props.column.id}>
-                    {(provided) => (
+                    {(provided, snapshot) => (
                         <div
                             ref={provided.innerRef}
                             {...provided.droppableProps}>
