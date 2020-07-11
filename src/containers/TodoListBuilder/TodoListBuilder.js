@@ -100,7 +100,7 @@ class TodoList extends Component {
 
         if(itemToSubmit.content) {
             let newItems = {... this.state.items};
-            const newId = Date.now()
+            const newId = Date.now().toString()
             const newItem = {
                 id: newId,
                 created_timestamp: newId,
@@ -119,7 +119,7 @@ class TodoList extends Component {
     }
 
     removeItemHandler = (itemId, columnId) => {
-        // Need to remove from both  items & columns.taskIds
+        // Need to remove from both items & columns.taskIds
         console.log(columnId)
 
         let updatedItems = {... this.state.items};
@@ -132,6 +132,8 @@ class TodoList extends Component {
         );
         updatedColumn.taskIds = updatedTaskIds;
         columns[columnId] = updatedColumn;
+
+        console.log(columns);
 
         this.setState({
             items: updatedItems,
