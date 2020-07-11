@@ -1,0 +1,14 @@
+.ColumnHeader {
+    margin-top: 20px;
+}
+
+.ColumnHeader h3 {
+    display: inline;
+    margin-left: 40px;
+    text-align: start;
+}
+
+.ColumnHeader p {
+    display: inline;
+    margin-left: 10px;
+}

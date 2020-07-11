@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './Column.css';
 import { Droppable } from 'react-beautiful-dnd';
+import ColumnHeader from './ColumnHeader/ColumnHeader';
 import TodoForm from './TodoForm/TodoForm';
 import TodoItems from './TodoItems/TodoItems';
 import TodoItem from './TodoItems/TodoItem/TodoItem';
@@ -23,7 +24,9 @@ class column extends Component {
 
         return (
             <div className='Column'>
-                <h3>{this.props.column.title}</h3>
+                <ColumnHeader
+                    itemNum={this.props.items.length}>
+                    <h3>{this.props.column.title}</h3></ColumnHeader>
                 <TodoForm 
                     value={this.props.column.itemToSubmit.content} 
                     inputChanged={(e) => this.props.formInputChanged(e,this. props.column.id)} 
