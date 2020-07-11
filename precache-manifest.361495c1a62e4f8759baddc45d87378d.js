@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b62ee7dc84bb0d0e503c49ef252ad93c",
+    "revision": "55b32b2b16d97ffa34f70aabf7b68032",
     "url": "/everyday-action/index.html"
   },
   {
-    "revision": "ec31e5369e6a9820784d",
+    "revision": "e3cb17b3afda84cf70a2",
     "url": "/everyday-action/static/css/main.bce374c4.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/everyday-action/static/js/2.6f7bbc36.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "ec31e5369e6a9820784d",
-    "url": "/everyday-action/static/js/main.d9aef2eb.chunk.js"
+    "revision": "e3cb17b3afda84cf70a2",
+    "url": "/everyday-action/static/js/main.12ee91e8.chunk.js"
   },
   {
     "revision": "d339cdac8be0dc6e6f56",
