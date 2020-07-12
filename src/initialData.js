@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 const initialData = {
 
     itemTypes: ["运动", "生活", "学习", "工作", "娱乐"],
@@ -7,6 +9,7 @@ const initialData = {
             created_timestamp: '1593920420073',
             content: "跑步",
             type: "运动",
+            due_date: moment().day(1),
             done: false
         },
         '1593920427447': {
@@ -14,6 +17,7 @@ const initialData = {
             created_timestamp: '1593920420073',
             content: "混合有氧",
             type: "运动",
+            due_date: null,
             done: false
         },
         '1593920442267': {
@@ -21,6 +25,7 @@ const initialData = {
             created_timestamp: '1593920420073',
             content: "洗牙",
             type: "生活",
+            due_date: null,
             done: false
         },
         '1593988570469': {
@@ -28,6 +33,15 @@ const initialData = {
             created_timestamp: '1593988570469',
             content: "看书",
             type: "学习",
+            due_date: null,
+            done: false
+        },
+        '1594592079699': {
+            id: '1594592079699',
+            created_timestamp: '1594592079699',
+            content: "最后生还者2",
+            type: "娱乐",
+            due_date: moment().day(30),
             done: false
         }
     },
@@ -48,7 +62,7 @@ const initialData = {
         'column-2': {
             id: 'column-2',
             title: '行动中',
-            taskIds: ['1593920442267', '1593988570469'],
+            taskIds: ['1593920442267', '1593988570469', '1594592079699'],
             itemToSubmit: {
                 id: null,
                 content: "新任务",

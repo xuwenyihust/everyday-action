@@ -1,5 +1,6 @@
 .TodoItem {
     display: flex;
+    flex-wrap: wrap;
 
     padding: 10px;
 
@@ -11,6 +12,12 @@
 
     background-color: white;
     text-align: left;
+}
+
+.break {
+    width: 100%;
+    height: 5px;
+    break-after: always
 }
 
 .TodoItem.isDragging_true {
@@ -50,4 +57,33 @@
 .TodoItem button.closeButton {
     border: none;
     background-color: white;
+}
+
+.DueDate {
+    display: flex;
+    justify-content: center;
+
+    font-size: x-small;
+
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+
+    color: white;
+    background-color: green;
+    border-radius: 3px;
+}
+
+.DueDate p {
+    margin-top: 2px;;
+}
+
+.DueDate svg.MuiSvgIcon-root {
+    width: 15px;
+}
+
+.SingleDatePicker {
+    background-color: grey;
+    display: block;
 }

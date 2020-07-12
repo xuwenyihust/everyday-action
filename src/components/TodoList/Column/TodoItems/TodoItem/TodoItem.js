@@ -1,14 +1,32 @@
 import React, { Component } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
+import moment from 'moment';
+import 'react-dates/initialize';
+import { SingleDatePicker } from 'react-dates';
 import Icon from '@material-ui/core/Icon';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
 import AirlineSeatIndividualSuiteIcon from '@material-ui/icons/AirlineSeatIndividualSuite';
 import LaptopChromebookIcon from '@material-ui/icons/LaptopChromebook';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import './TodoItem.css';
 
 class todoItem extends Component {
+
+    // TODO: temp state
+    // state = {
+    //     date: moment(),
+    //     focused: false
+    // }
+
+    // onDateChange(date) {
+    //     this.setState({ date:  date});
+    // }
+
+    // onFocusChange({ focused }) {
+    //     this.setState({ focused: focused });
+    // }
 
     render() {
 
@@ -34,6 +52,15 @@ class todoItem extends Component {
                 break;
         }
 
+        let dueDate;
+        if (this.props.item.due_date) {
+            dueDate = <div className='DueDate'>
+                        <AccessTimeIcon fontSize='small'/> 
+                        <p>{this.props.item.due_date.format('LL')}</p></div>;
+        } else {
+            dueDate = null;
+        }
+
         return (
             <Draggable
                 draggableId={this.props.item.id.toString()}
@@ -57,6 +84,15 @@ class todoItem extends Component {
                                 type="button" 
                                 className="closeButton"
                                 onClick={() => this.props.closeClicked(this.props.item.id, this.props.columnId)}><i className="fa fa-close"></i></button>
+                            <div className="break"></div>
+                            {/* <SingleDatePicker
+                                date={this.state.date} // momentPropTypes.momentObj or null
+                                onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
+                                focused={this.state.focused} // PropTypes.bool
+                                onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
+                                id="date_input" // PropTypes.string.isRequired,
+                            /> */}
+                            {dueDate}
                         </div>
                     )}
             </Draggable>

@@ -193,6 +193,8 @@ class TodoList extends Component {
     }
 
     render () {
+        // console.log(this.state.items[1593920420073].due_date);
+
         const columns = this.state.columnOrder.map(columnId => {
             const column = this.state.columns[columnId];
             const items = column.taskIds.map(taskId => this.state.items[taskId]);
