@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './TodoListBuilder.css';
 import initialData from '../../initialData';
+import 'react-dates/lib/css/_datepicker.css';
 import { DragDropContext } from 'react-beautiful-dnd';
 import Column from '../../components/TodoList/Column/Column';
 import TodoItemSummary from '../../components/TodoList/Column/TodoItems/TodoItem/TodoItemSummary/TodoItemSummary';
@@ -120,8 +121,6 @@ class TodoList extends Component {
 
     removeItemHandler = (itemId, columnId) => {
         // Need to remove from both items & columns.taskIds
-        console.log(columnId)
-
         let updatedItems = {... this.state.items};
         delete updatedItems[itemId];
 
@@ -159,6 +158,7 @@ class TodoList extends Component {
         this.setState({items: updatedItems});
     }
 
+    // Item Summary Modal
     itemSummaryContentChangeHandler = (event) => {
         let itemUnderEditing = this.state.itemUnderEditing;
         itemUnderEditing.content = event.target.value;
@@ -167,10 +167,27 @@ class TodoList extends Component {
     }
 
     itemSummaryTypeChangeHandler = (event) => {
-        let itemUnderEditing = this.state.itemUnderEditing;
-        itemUnderEditing.type = event.target.value;
+        const itemUnderEditing = this.state.itemUnderEditing;
+        const newItemUnderEditing = {
+            ... itemUnderEditing,
+            type: event.target.value
+        }
 
-        this.setState({itemUnderEditing: itemUnderEditing})
+        this.setState({itemUnderEditing: newItemUnderEditing})
+    }
+
+    itemDueDateChangeHandler = (date, itemId)  => {
+        const itemUnderEditing = this.state.itemUnderEditing;
+        const newItemUnderEditing = {
+            ... itemUnderEditing,
+            due_date: date
+        }
+
+        this.setState({itemUnderEditing: newItemUnderEditing})
+    }
+
+    itemDueDateFocusChangeHandler = ({ focused })  => {
+        this.setState({ dueDatePickFocused: focused });
     }
 
     editItemSaveHandler = (item) => {
@@ -214,8 +231,12 @@ class TodoList extends Component {
                     <TodoItemSummary 
                         itemTypes={this.state.itemTypes}
                         item={this.state.itemUnderEditing}
+                        dueDatePickDate={this.state.dueDatePickDate}
+                        dueDatePickFocused={this.state.dueDatePickFocused}
                         itemSummaryContentChanged={this.itemSummaryContentChangeHandler}
                         itemSummaryTypeChanged={this.itemSummaryTypeChangeHandler}
+                        itemDueDateChanged={this.itemDueDateChangeHandler}
+                        itemDueDateFocusChanged={this.itemDueDateFocusChangeHandler}
                         saveClicked={this.editItemSaveHandler}
                         cancelClicked={this.editItemCancelHandler}/>
                 </Modal>

@@ -1,4 +1,7 @@
 import React from 'react';
+import 'react-dates/initialize';
+import { SingleDatePicker } from 'react-dates';
+import moment from 'moment';
 import './TodoItemSummary.css';
 
 const todoItemSummary = (props) => {
@@ -18,7 +21,15 @@ const todoItemSummary = (props) => {
         }
     });
 
+    let dueDate;
+    if (props.item.due_date) {
+        dueDate = props.item.due_date;
+    } else {
+        dueDate = null;
+    }
+
     return (
+        
 
         <div className='TodoItemSummary'>
 
@@ -36,6 +47,18 @@ const todoItemSummary = (props) => {
                     {itemTypeOptions}
                 </select>
             </form>
+
+            <div className="DueDatePick">
+                <p>截止日期: </p>
+                <SingleDatePicker
+                    date={dueDate} // momentPropTypes.momentObj or null
+                    onDateChange={(date) => props.itemDueDateChanged(date, item.id)} // PropTypes.func.isRequired
+                    focused={props.dueDatePickFocused} // PropTypes.bool
+                    onFocusChange={({ focused }) => props.itemDueDateFocusChanged({ focused })} // PropTypes.func.isRequired
+                    id="date_input" // PropTypes.string.isRequired,
+                />
+            </div>
+            
 
             <button
                 type="button"

@@ -6,6 +6,7 @@ import ImportContactsIcon from '@material-ui/icons/ImportContacts';
 import AirlineSeatIndividualSuiteIcon from '@material-ui/icons/AirlineSeatIndividualSuite';
 import LaptopChromebookIcon from '@material-ui/icons/LaptopChromebook';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import './TodoItem.css';
 
 class todoItem extends Component {
@@ -34,6 +35,15 @@ class todoItem extends Component {
                 break;
         }
 
+        let dueDate;
+        if (this.props.item.due_date) {
+            dueDate = <div className='DueDate'>
+                        <AccessTimeIcon fontSize='small'/> 
+                        <p>{this.props.item.due_date.format('LL')}</p></div>;
+        } else {
+            dueDate = null;
+        }
+
         return (
             <Draggable
                 draggableId={this.props.item.id.toString()}
@@ -57,6 +67,8 @@ class todoItem extends Component {
                                 type="button" 
                                 className="closeButton"
                                 onClick={() => this.props.closeClicked(this.props.item.id, this.props.columnId)}><i className="fa fa-close"></i></button>
+                            <div className="break"></div>
+                            {dueDate}
                         </div>
                     )}
             </Draggable>

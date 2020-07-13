@@ -1,4 +1,5 @@
 .Column {
+    width: 400px;
     min-width: 400px;
 
     margin-left: 10px;
