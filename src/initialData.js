@@ -33,7 +33,7 @@ const initialData = {
             created_timestamp: '1593988570469',
             content: "看书",
             type: "学习",
-            due_date: null,
+            due_date: moment().day(-2),
             done: false
         },
         '1594592079699': {
