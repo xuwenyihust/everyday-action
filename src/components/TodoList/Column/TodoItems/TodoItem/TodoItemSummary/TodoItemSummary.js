@@ -1,6 +1,7 @@
 import React from 'react';
 import 'react-dates/initialize';
 import { SingleDatePicker } from 'react-dates';
+import DeleteIcon from '@material-ui/icons/Delete';
 import moment from 'moment';
 import './TodoItemSummary.css';
 
@@ -57,6 +58,10 @@ const todoItemSummary = (props) => {
                     onFocusChange={({ focused }) => props.itemDueDateFocusChanged({ focused })} // PropTypes.func.isRequired
                     id="date_input" // PropTypes.string.isRequired,
                 />
+                <DeleteIcon 
+                    fontSize='medium'
+                    onClick={() => props.itemDueDateDeleted(item.id)}/>
+
             </div>
             
 

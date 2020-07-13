@@ -71,8 +71,15 @@
     padding-bottom: 2px;
 
     color: white;
-    background-color: green;
     border-radius: 3px;
+}
+
+.DueDate.good {
+    background-color: green;
+}
+
+.DueDate.passed {
+    background-color: rgb(165, 0, 0);
 }
 
 .DueDate p {

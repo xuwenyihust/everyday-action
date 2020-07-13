@@ -84,8 +84,11 @@
 .DueDatePick div.SingleDatePicker {
     margin-left: 10px;
     background-color: white;;
-    /* display: none; */
-    /* height: 20%; */
+}
+
+.DueDatePick svg {
+    margin-left: 10px;
+    align-self: center;
 }
 
 /* // NOTE: the order of these styles DO matter */

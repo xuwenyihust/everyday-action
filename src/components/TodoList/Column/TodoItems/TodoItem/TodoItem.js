@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
+import moment from 'moment';
 import Icon from '@material-ui/core/Icon';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
@@ -36,10 +37,17 @@ class todoItem extends Component {
         }
 
         let dueDate;
-        if (this.props.item.due_date) {
-            dueDate = <div className='DueDate'>
+        const currentDate = moment();
+        const duePassed = currentDate > this.props.item.due_date;
+
+        if (this.props.item.due_date && !duePassed) {
+            dueDate = <div className='DueDate good'>
                         <AccessTimeIcon fontSize='small'/> 
-                        <p>{this.props.item.due_date.format('LL')}</p></div>;
+                        <p>{this.props.item.due_date.format('L')}</p></div>;
+        } else if (this.props.item.due_date && duePassed) {
+            dueDate = <div className='DueDate passed'>
+                        <AccessTimeIcon fontSize='small'/> 
+                        <p>{this.props.item.due_date.format('L')}</p></div>;
         } else {
             dueDate = null;
         }
