@@ -6,13 +6,12 @@
 
 .TodoItemSummary form {
     width: 100%;
-    padding: 10px;
+    padding-top: 10px;
+
     display: inline-block;
     box-sizing: border-box;
-    margin-left: 30px;
-}
 
-.TodoItemSummary form {
+    margin-left: 0px;
     color: #000000;
 }
 
@@ -32,6 +31,11 @@
 .TodoItemSummary form select option {
     border: 1px solid transparent;
     border-color:  rgba(0, 0, 0, 0.1);
+}
+
+.TodoItemSummary p {
+    padding: 0;
+    margin-left: 0;
 }
 
 /* .TodoItemSummary form select.select-selected {
@@ -69,4 +73,45 @@
 
 .TodoItemSummary button.cancelButton:hover {
     background-color: #ddd;
+}
+
+.DueDatePick {
+    display: flex;
+    padding-top: 10px;
+}
+
+
+.DueDatePick div.SingleDatePicker {
+    margin-left: 10px;
+    background-color: white;;
+    /* display: none; */
+    /* height: 20%; */
+}
+
+/* // NOTE: the order of these styles DO matter */
+
+/* // Will edit everything selected including everything between a range of dates */
+.CalendarDay__selected_span {
+  background: #82e0aa; 
+  color: white; 
+  border: 1px solid lightpink; 
+}
+
+/* // Will edit selected date or the endpoints of a range of dates */
+.CalendarDay__selected {
+  background: rgb(97, 75, 75);
+  color: white;
+}
+
+/* // Will edit when hovered over. _span style also has this property */
+.CalendarDay__selected:hover {
+  background: orange;
+  color: white;
+}
+
+/* // Will edit when the second date (end date) in a range of dates
+// is not yet selected. Edits the dates between your mouse and said date */
+.CalendarDay__hovered_span:hover,
+.CalendarDay__hovered_span {
+  background: brown;
 }
