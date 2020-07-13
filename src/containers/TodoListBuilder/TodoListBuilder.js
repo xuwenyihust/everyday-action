@@ -190,6 +190,16 @@ class TodoList extends Component {
         this.setState({ dueDatePickFocused: focused });
     }
 
+    itemDueDateDeleteHandler = () => {
+        const itemUnderEditing = this.state.itemUnderEditing;
+        const newItemUnderEditing = {
+            ... itemUnderEditing,
+            due_date: null
+        }
+
+        this.setState({itemUnderEditing: newItemUnderEditing})
+    }
+
     editItemSaveHandler = (item) => {
         let items = {... this.state.items};
         items[item.id] = item;
@@ -237,6 +247,7 @@ class TodoList extends Component {
                         itemSummaryTypeChanged={this.itemSummaryTypeChangeHandler}
                         itemDueDateChanged={this.itemDueDateChangeHandler}
                         itemDueDateFocusChanged={this.itemDueDateFocusChangeHandler}
+                        itemDueDateDeleted={this.itemDueDateDeleteHandler}
                         saveClicked={this.editItemSaveHandler}
                         cancelClicked={this.editItemCancelHandler}/>
                 </Modal>
