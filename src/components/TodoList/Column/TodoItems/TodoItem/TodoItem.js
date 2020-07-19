@@ -8,6 +8,7 @@ import AirlineSeatIndividualSuiteIcon from '@material-ui/icons/AirlineSeatIndivi
 import LaptopChromebookIcon from '@material-ui/icons/LaptopChromebook';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
+import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 import './TodoItem.css';
 
 class todoItem extends Component {
@@ -36,6 +37,7 @@ class todoItem extends Component {
                 break;
         }
 
+        // Due date
         let dueDate;
         const currentDate = moment();
         const duePassed = currentDate > this.props.item.due_date;
@@ -50,6 +52,21 @@ class todoItem extends Component {
                         <p>{this.props.item.due_date.format('L')}</p></div>;
         } else {
             dueDate = null;
+        }
+
+        // Subtasks
+        let subTasks;
+        const subTaskObjects = this.props.item.sub_tasks;
+        const hasSubTasks = Object.entries(subTaskObjects).length !== 0; 
+        if (hasSubTasks) {
+            const doneTasksCount = Object.keys(subTaskObjects).filter((subTaskKey, index) => 
+                subTaskObjects[subTaskKey].done === true).length;
+            console.log(doneTasksCount);
+            subTasks = <div className='SubTaskIcon'>
+                        <AssignmentTurnedInIcon fontSize='small'/>
+                        <p>{doneTasksCount}/{Object.keys(subTaskObjects).length}</p></div>
+        } else {
+            subTasks = null;
         }
 
         return (
@@ -76,6 +93,7 @@ class todoItem extends Component {
                                 onClick={() => this.props.closeClicked(this.props.item.id, this.props.columnId)}><i className="fa fa-close"></i></button>
                             <div className="break"></div>
                             {dueDate}
+                            {subTasks}
                         </div>
                     )}
             </Draggable>
