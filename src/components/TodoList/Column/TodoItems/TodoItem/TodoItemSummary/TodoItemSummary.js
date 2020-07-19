@@ -3,6 +3,8 @@ import 'react-dates/initialize';
 import { SingleDatePicker } from 'react-dates';
 import DeleteIcon from '@material-ui/icons/Delete';
 import moment from 'moment';
+import SubTasks from './SubTasks/SubTasks';
+import SubTask from './SubTasks/SubTask/SubTask';
 import './TodoItemSummary.css';
 
 const todoItemSummary = (props) => {
@@ -29,41 +31,62 @@ const todoItemSummary = (props) => {
         dueDate = null;
     }
 
-    return (
-        
+    const subTaskObjects = props.item.sub_tasks;
+    let subTasks;
+    if (subTaskObjects) {
+        const hasSubTasks = Object.entries(subTaskObjects).length !== 0;
+        subTasks = Object.keys(subTaskObjects).map((subTaskKey) => {
+            return <SubTask 
+                        key={subTaskKey}
+                        subTaskKey={subTaskKey}
+                        content={subTaskObjects[subTaskKey].content}
+                        checked={subTaskObjects[subTaskKey].done}
+                        subTaskClicked={props.subTaskClicked}/>
+        });
+    }
 
+    return (
+    
         <div className='TodoItemSummary'>
 
-            <form>
-                <label>内容：</label>
-                <input 
-                    value={props.item.content}
-                    onChange={props.itemSummaryContentChanged}></input>
-            </form>
+            <div className='Content'>
+                <form>
+                    <input 
+                        value={props.item.content}
+                        onChange={props.itemSummaryContentChanged}></input>
+                </form>
+            </div>
 
-            <form>
-                <label>类别：</label>
-                <select
-                    onChange={props.itemSummaryTypeChanged}>
-                    {itemTypeOptions}
-                </select>
-            </form>
+            <div className='Type'>
+                <form>
+                    <label>类别: </label>
+                    <select
+                        onChange={props.itemSummaryTypeChanged}>
+                        {itemTypeOptions}
+                    </select>
+                </form>
+            </div>
 
             <div className="DueDatePick">
                 <p>截止日期: </p>
-                <SingleDatePicker
-                    date={dueDate} // momentPropTypes.momentObj or null
-                    onDateChange={(date) => props.itemDueDateChanged(date, item.id)} // PropTypes.func.isRequired
-                    focused={props.dueDatePickFocused} // PropTypes.bool
-                    onFocusChange={({ focused }) => props.itemDueDateFocusChanged({ focused })} // PropTypes.func.isRequired
-                    id="date_input" // PropTypes.string.isRequired,
-                />
-                <DeleteIcon 
-                    fontSize='medium'
-                    onClick={() => props.itemDueDateDeleted(item.id)}/>
+                <div className="Pick">
+                    <SingleDatePicker
+                        date={dueDate} // momentPropTypes.momentObj or null
+                        onDateChange={(date) => props.itemDueDateChanged(date, item.id)} // PropTypes.func.isRequired
+                        focused={props.dueDatePickFocused} // PropTypes.bool
+                        onFocusChange={({ focused }) => props.itemDueDateFocusChanged({ focused })} // PropTypes.func.isRequired
+                        id="date_input" // PropTypes.string.isRequired,
+                    />
+                    <DeleteIcon 
+                        fontSize='medium'
+                        onClick={() => props.itemDueDateDeleted(item.id)}/>
+                </div>
 
             </div>
-            
+
+            <SubTasks>
+                {subTasks}
+            </SubTasks>
 
             <button
                 type="button"

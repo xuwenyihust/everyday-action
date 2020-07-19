@@ -1,41 +1,39 @@
 .TodoItemSummary {
     display: block;
-
     padding: 10px;
 }
 
-.TodoItemSummary form {
-    width: 100%;
-    padding-top: 10px;
-
-    display: inline-block;
-    box-sizing: border-box;
-
-    margin-left: 0px;
-    color: #000000;
+.TodoItemSummary div.Content {
+    margin-top: 0px;
 }
 
-.TodoItemSummary form input {
+.TodoItemSummary div.Content form input {
     padding: 8px 16px;
+    
     border: 1px solid transparent;
     border-color:  rgba(0, 0, 0, 0.1);
+
+    width: 50%;
+
+    font-size: 18px;
+    font-weight: bold;
 }
 
-.TodoItemSummary form select {
+.TodoItemSummary div.Type {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+
+.TodoItemSummary div.Type form select {
+    display: block;
+
     padding: 8px 16px;
+    margin-top: 10px;
+
     border: 1px solid transparent;
     border-color:  rgba(0, 0, 0, 0.1);
     cursor: pointer;
-}
-
-.TodoItemSummary form select option {
-    border: 1px solid transparent;
-    border-color:  rgba(0, 0, 0, 0.1);
-}
-
-.TodoItemSummary p {
-    padding: 0;
-    margin-left: 0;
 }
 
 /* .TodoItemSummary form select.select-selected {
@@ -46,8 +44,32 @@
     user-select: none;
 } */
 
+.TodoItemSummary div.DueDatePick {
+    display: block;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.TodoItemSummary div.DueDatePick p {
+    width: 100%;
+}
+
+.TodoItemSummary div.DueDatePick div.Pick {
+    display: flex;
+}
+
+.TodoItemSummary div.DueDatePick div.Pick div.SingleDatePicker {
+    margin-left: 0px;
+    background-color: white;;
+}
+
+.TodoItemSummary div.DueDatePick svg {
+    margin-left: 10px;
+    align-self: center;
+}
+
 .TodoItemSummary button {
-    margin-top: 10px;
+    margin-top: 20px;
     margin-bottom: 5px;
 
     padding: 14px 28px;
@@ -73,22 +95,6 @@
 
 .TodoItemSummary button.cancelButton:hover {
     background-color: #ddd;
-}
-
-.DueDatePick {
-    display: flex;
-    padding-top: 10px;
-}
-
-
-.DueDatePick div.SingleDatePicker {
-    margin-left: 10px;
-    background-color: white;;
-}
-
-.DueDatePick svg {
-    margin-left: 10px;
-    align-self: center;
 }
 
 /* // NOTE: the order of these styles DO matter */

@@ -141,8 +141,13 @@ class TodoList extends Component {
     }
 
     editItemHandler = (itemId) => {
-        const items = {... this.state.items}
-        const itemUnderEditing = items[itemId];
+        const items = {
+            ... this.state.items
+        };
+        const itemUnderEditing = {
+            ... items[itemId],
+            sub_tasks: {... items[itemId].sub_tasks}
+        };
 
         this.setState({
             editingItem: true,
@@ -200,6 +205,23 @@ class TodoList extends Component {
         this.setState({itemUnderEditing: newItemUnderEditing})
     }
 
+    itemSubTaskClickHandler = (subTaskKey) => {
+        const itemUnderEditing = this.state.itemUnderEditing;
+
+        const newSubTask = {
+            ... itemUnderEditing.sub_tasks[subTaskKey],
+            done: !itemUnderEditing.sub_tasks[subTaskKey].done
+        }
+        let newSubTasks = itemUnderEditing.sub_tasks;
+        newSubTasks[subTaskKey] = newSubTask;
+
+        const newItemUnderEditing = {
+            ... itemUnderEditing,
+            sub_tasks: newSubTasks
+        }
+        this.setState({itemUnderEditing: newItemUnderEditing})
+    }
+
     editItemSaveHandler = (item) => {
         let items = {... this.state.items};
         items[item.id] = item;
@@ -248,6 +270,7 @@ class TodoList extends Component {
                         itemDueDateChanged={this.itemDueDateChangeHandler}
                         itemDueDateFocusChanged={this.itemDueDateFocusChangeHandler}
                         itemDueDateDeleted={this.itemDueDateDeleteHandler}
+                        subTaskClicked={this.itemSubTaskClickHandler}
                         saveClicked={this.editItemSaveHandler}
                         cancelClicked={this.editItemCancelHandler}/>
                 </Modal>
