@@ -61,7 +61,6 @@ class todoItem extends Component {
         if (hasSubTasks) {
             const doneTasksCount = Object.keys(subTaskObjects).filter((subTaskKey, index) => 
                 subTaskObjects[subTaskKey].done === true).length;
-            console.log(doneTasksCount);
             subTasks = <div className='SubTaskIcon'>
                         <AssignmentTurnedInIcon fontSize='small'/>
                         <p>{doneTasksCount}/{Object.keys(subTaskObjects).length}</p></div>

@@ -40,7 +40,7 @@ const initialData = {
             sub_tasks: {
                 '1': {
                     content: "第一集",
-                    done: false
+                    done: true
                 },
                 '2': {
                     content: "第二集",

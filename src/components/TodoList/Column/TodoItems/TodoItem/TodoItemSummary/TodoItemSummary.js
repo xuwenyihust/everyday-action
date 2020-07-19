@@ -35,10 +35,13 @@ const todoItemSummary = (props) => {
     let subTasks;
     if (subTaskObjects) {
         const hasSubTasks = Object.entries(subTaskObjects).length !== 0;
-        subTasks = Object.keys(subTaskObjects).map((itemKey, index) => {
+        subTasks = Object.keys(subTaskObjects).map((subTaskKey) => {
             return <SubTask 
-                        key={itemKey}
-                        content={subTaskObjects[itemKey].content}/>
+                        key={subTaskKey}
+                        subTaskKey={subTaskKey}
+                        content={subTaskObjects[subTaskKey].content}
+                        checked={subTaskObjects[subTaskKey].done}
+                        subTaskClicked={props.subTaskClicked}/>
         });
     }
 
