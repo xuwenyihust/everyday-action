@@ -1,0 +1,10 @@
+.SubTasks p {
+    font-weight: bold;
+}
+
+.SubTasks ul {
+    padding-left: 0px;
+
+    list-style: none;
+    list-style-type: none;
+}

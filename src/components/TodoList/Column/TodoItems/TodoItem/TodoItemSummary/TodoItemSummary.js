@@ -3,6 +3,8 @@ import 'react-dates/initialize';
 import { SingleDatePicker } from 'react-dates';
 import DeleteIcon from '@material-ui/icons/Delete';
 import moment from 'moment';
+import SubTasks from './SubTasks/SubTasks';
+import SubTask from './SubTasks/SubTask/SubTask';
 import './TodoItemSummary.css';
 
 const todoItemSummary = (props) => {
@@ -27,6 +29,17 @@ const todoItemSummary = (props) => {
         dueDate = props.item.due_date;
     } else {
         dueDate = null;
+    }
+
+    const subTaskObjects = props.item.sub_tasks;
+    let subTasks;
+    if (subTaskObjects) {
+        const hasSubTasks = Object.entries(subTaskObjects).length !== 0;
+        subTasks = Object.keys(subTaskObjects).map((itemKey, index) => {
+            return <SubTask 
+                        key={itemKey}
+                        content={subTaskObjects[itemKey].content}/>
+        });
     }
 
     return (
@@ -68,12 +81,9 @@ const todoItemSummary = (props) => {
 
             </div>
 
-            <div className='ChidrenTasks'>
-                <p>子任务:</p> 
-                <ul>1</ul>
-                <ul>1</ul>
-                <ul>1</ul>
-            </div>
+            <SubTasks>
+                {subTasks}
+            </SubTasks>
 
             <button
                 type="button"

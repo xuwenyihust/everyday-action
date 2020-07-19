@@ -10,7 +10,7 @@ const initialData = {
             content: "跑步",
             type: "运动",
             due_date: moment().day(1),
-            children: {},
+            sub_tasks: {},
             done: false
         },
         '1593920427447': {
@@ -19,7 +19,7 @@ const initialData = {
             content: "混合有氧",
             type: "运动",
             due_date: null,
-            children: {},
+            sub_tasks: {},
             done: false
         },
         '1593920442267': {
@@ -28,7 +28,7 @@ const initialData = {
             content: "洗牙",
             type: "生活",
             due_date: null,
-            children: {},
+            sub_tasks: {},
             done: false
         },
         '1593988570469': {
@@ -37,15 +37,18 @@ const initialData = {
             content: "课程 MIT Introduction to Deep Learning",
             type: "学习",
             due_date: moment().day(-2),
-            children: {
+            sub_tasks: {
                 '1': {
-                    content: "Section 1"
+                    content: "第一集",
+                    done: false
                 },
                 '2': {
-                    content: "Section 2"
+                    content: "第二集",
+                    done: false
                 },
                 '3': {
-                    content: "Section 3"
+                    content: "第三集",
+                    done: false
                 }
             },
             done: false
@@ -56,7 +59,7 @@ const initialData = {
             content: "最后生还者2",
             type: "娱乐",
             due_date: moment().day(30),
-            children: {},
+            sub_tasks: {},
             done: false
         }
     },
