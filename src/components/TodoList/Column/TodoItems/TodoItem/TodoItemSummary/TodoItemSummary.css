@@ -19,6 +19,8 @@
     padding: 8px 16px;
     border: 1px solid transparent;
     border-color:  rgba(0, 0, 0, 0.1);
+
+    width: 50%;
 }
 
 .TodoItemSummary form select {

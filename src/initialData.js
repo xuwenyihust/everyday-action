@@ -10,6 +10,7 @@ const initialData = {
             content: "跑步",
             type: "运动",
             due_date: moment().day(1),
+            children: {},
             done: false
         },
         '1593920427447': {
@@ -18,6 +19,7 @@ const initialData = {
             content: "混合有氧",
             type: "运动",
             due_date: null,
+            children: {},
             done: false
         },
         '1593920442267': {
@@ -26,14 +28,16 @@ const initialData = {
             content: "洗牙",
             type: "生活",
             due_date: null,
+            children: {},
             done: false
         },
         '1593988570469': {
             id: '1593988570469',
             created_timestamp: '1593988570469',
-            content: "看书",
+            content: "课程 MIT Introduction to Deep Learning",
             type: "学习",
             due_date: moment().day(-2),
+            children: {},
             done: false
         },
         '1594592079699': {
@@ -42,6 +46,7 @@ const initialData = {
             content: "最后生还者2",
             type: "娱乐",
             due_date: moment().day(30),
+            children: {},
             done: false
         }
     },

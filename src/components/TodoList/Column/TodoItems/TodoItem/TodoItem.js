@@ -60,8 +60,7 @@ class todoItem extends Component {
                         <div className={`TodoItem isDragging_${snapshot.isDragging}`}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
-                            ref={provided.innerRef}
-                        >
+                            ref={provided.innerRef}>
                             {icon}
                             <p 
                                 className={this.props.item.done ? 'done' : 'undone'}
