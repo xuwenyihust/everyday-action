@@ -37,7 +37,17 @@ const initialData = {
             content: "课程 MIT Introduction to Deep Learning",
             type: "学习",
             due_date: moment().day(-2),
-            children: {},
+            children: {
+                '1': {
+                    content: "Section 1"
+                },
+                '2': {
+                    content: "Section 2"
+                },
+                '3': {
+                    content: "Section 3"
+                }
+            },
             done: false
         },
         '1594592079699': {

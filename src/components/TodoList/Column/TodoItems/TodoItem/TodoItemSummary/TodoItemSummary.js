@@ -30,40 +30,50 @@ const todoItemSummary = (props) => {
     }
 
     return (
-        
-
+    
         <div className='TodoItemSummary'>
 
-            <form>
-                <label>内容：</label>
-                <input 
-                    value={props.item.content}
-                    onChange={props.itemSummaryContentChanged}></input>
-            </form>
+            <div className='Content'>
+                <form>
+                    <input 
+                        value={props.item.content}
+                        onChange={props.itemSummaryContentChanged}></input>
+                </form>
+            </div>
 
-            <form>
-                <label>类别：</label>
-                <select
-                    onChange={props.itemSummaryTypeChanged}>
-                    {itemTypeOptions}
-                </select>
-            </form>
+            <div className='Type'>
+                <form>
+                    <label>类别: </label>
+                    <select
+                        onChange={props.itemSummaryTypeChanged}>
+                        {itemTypeOptions}
+                    </select>
+                </form>
+            </div>
 
             <div className="DueDatePick">
                 <p>截止日期: </p>
-                <SingleDatePicker
-                    date={dueDate} // momentPropTypes.momentObj or null
-                    onDateChange={(date) => props.itemDueDateChanged(date, item.id)} // PropTypes.func.isRequired
-                    focused={props.dueDatePickFocused} // PropTypes.bool
-                    onFocusChange={({ focused }) => props.itemDueDateFocusChanged({ focused })} // PropTypes.func.isRequired
-                    id="date_input" // PropTypes.string.isRequired,
-                />
-                <DeleteIcon 
-                    fontSize='medium'
-                    onClick={() => props.itemDueDateDeleted(item.id)}/>
+                <div className="Pick">
+                    <SingleDatePicker
+                        date={dueDate} // momentPropTypes.momentObj or null
+                        onDateChange={(date) => props.itemDueDateChanged(date, item.id)} // PropTypes.func.isRequired
+                        focused={props.dueDatePickFocused} // PropTypes.bool
+                        onFocusChange={({ focused }) => props.itemDueDateFocusChanged({ focused })} // PropTypes.func.isRequired
+                        id="date_input" // PropTypes.string.isRequired,
+                    />
+                    <DeleteIcon 
+                        fontSize='medium'
+                        onClick={() => props.itemDueDateDeleted(item.id)}/>
+                </div>
 
             </div>
-            
+
+            <div className='ChidrenTasks'>
+                <p>子任务:</p> 
+                <ul>1</ul>
+                <ul>1</ul>
+                <ul>1</ul>
+            </div>
 
             <button
                 type="button"
