@@ -261,8 +261,11 @@ class TodoList extends Component {
     itemSubTaskEdited = (event, subTaskKey) => {
         const itemUnderEditing = this.state.itemUnderEditing;
 
-        let subTasks = itemUnderEditing.sub_tasks;
-        subTasks[subTaskKey].content = event.target.value;
+        let subTasks = {... itemUnderEditing.sub_tasks};
+        subTasks[subTaskKey] = {
+            ... subTasks[subTaskKey],
+            content: event.target.value
+        };
 
         const newItemUnderEditing = {
             ... itemUnderEditing,
