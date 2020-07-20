@@ -42,14 +42,21 @@ class TodoList extends Component {
                     [newColumn.id]: newColumn
                 }
             };
-
             this.setState(newState);
         } else {
-
             const sourceColumn = this.state.columns[source.droppableId];
             const destinationColumn = this.state.columns[destination.droppableId];
             const newSourceTaskIds = Array.from(sourceColumn.taskIds);
             const newDestinationTaskIds = Array.from(destinationColumn.taskIds);
+
+            const newItems = {... this.state.items}
+            let newItem = newItems[draggableId];
+            // Auto be done if moved to DONE
+            if (destinationColumn.title === '完成') {
+                newItem.done = true;
+            } else if (sourceColumn.title === '完成' && newItem.done === true) {
+                newItem.done = false;
+            }
 
             newSourceTaskIds.splice(source.index, 1)
             newDestinationTaskIds.splice(destination.index, 0, draggableId)
@@ -65,6 +72,7 @@ class TodoList extends Component {
 
             const newState = {
                 ...this.state,
+                items: newItems,
                 columns: {
                     ...this.state.columns,
                     [newSourceColumn.id]: newSourceColumn,
@@ -158,12 +166,42 @@ class TodoList extends Component {
         })
     }
 
-    revertItemDoneHandler = (itemId) => {
+    revertItemDoneHandler = (itemId, columnId) => {
         let updatedItems = {... this.state.items};
         let updatedItem = updatedItems[itemId];
-        updatedItem.done = !updatedItem.done;
+        if (updatedItem.done === false) {
+            updatedItem.done = true;
 
-        this.setState({items: updatedItems});
+            const sourceColumn = this.state.columns[columnId];
+            const destinationColumn = this.state.columns["完成"];
+
+            const newSourceTaskIds = sourceColumn.taskIds.filter(id => id !== itemId);
+            const newDestinationTaskIds = [... destinationColumn.taskIds]
+            newDestinationTaskIds.push(itemId)
+
+            console.log(newSourceTaskIds);
+            console.log(newDestinationTaskIds);
+
+            const newSourceColumn = {
+                ... sourceColumn,
+                taskIds: newSourceTaskIds
+            };
+            const newDestinationColumn = {
+                ... destinationColumn,
+                taskIds: newDestinationTaskIds
+            };
+
+            const newState = {
+                ...this.state,
+                items: updatedItems,
+                columns: {
+                    ...this.state.columns,
+                    [newSourceColumn.id]: newSourceColumn,
+                    [newDestinationColumn.id]: newDestinationColumn
+                }
+            };
+            this.setState(newState);
+        }
     }
 
     // Item Summary Modal

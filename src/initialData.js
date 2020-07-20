@@ -65,8 +65,8 @@ const initialData = {
     },
 
     columns: {
-        'column-1': {
-            id: 'column-1',
+        '感兴趣': {
+            id: '感兴趣',
             title: '感兴趣',
             taskIds: ['1593920420073', '1593920427447'],
             itemToSubmit: {
@@ -77,8 +77,8 @@ const initialData = {
                 done: false
             },
         },
-        'column-2': {
-            id: 'column-2',
+        '行动中': {
+            id: '行动中',
             title: '行动中',
             taskIds: ['1593920442267', '1593988570469', '1594592079699'],
             itemToSubmit: {
@@ -89,8 +89,8 @@ const initialData = {
                 done: false
             },
         },
-        'column-3': {
-            id: 'column-3',
+        '完成': {
+            id: '完成',
             title: '完成',
             taskIds: [],
             itemToSubmit: {
@@ -103,7 +103,7 @@ const initialData = {
         }
     },
 
-    columnOrder: ['column-1', 'column-2', 'column-3'],
+    columnOrder: ['感兴趣', '行动中', '完成'],
 
     editingItem: false,
     itemUnderEditing: {},

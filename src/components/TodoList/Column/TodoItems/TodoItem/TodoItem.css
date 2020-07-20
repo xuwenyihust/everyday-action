@@ -39,6 +39,10 @@
     width: 70%;
 }
 
+.TodoItem p:hover {
+    cursor: auto;
+}
+
 .TodoItem p.done {
     text-decoration: line-through;
     color:  grey;
@@ -49,15 +53,27 @@
     text-decoration: none;
 }
 
-.TodoItem button.editButton {
-    margin-left: auto;
-    border: none;
-    background-color: white;
-}
-
 .TodoItem button.closeButton {
     border: none;
     background-color: white;
+    margin-left: auto;
+    margin-right: 1px;
+}
+
+.TodoItem label.MuiFormControlLabel-root {
+    padding: 0;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.TodoItem label.MuiFormControlLabel-root span {
+    padding: 0;
+    margin-right: 0;
+}
+
+.TodoItem label.MuiFormControlLabel-root span svg {
+    padding: 0;
+    margin-right: 0;
 }
 
 .DueDate {
@@ -70,6 +86,8 @@
     padding-right: 2px;
     padding-top: 2px;
     padding-bottom: 2px;
+
+    margin-right: 5px;
 
     color: white;
     border-radius: 3px;
@@ -103,7 +121,6 @@
 }
 
 .SubTaskIcon svg.MuiSvgIcon-root {
-    margin-left: 8px;
     margin-right: 2px;
 }
 

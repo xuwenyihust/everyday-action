@@ -9,6 +9,8 @@ import LaptopChromebookIcon from '@material-ui/icons/LaptopChromebook';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 import './TodoItem.css';
 
 class todoItem extends Component {
@@ -80,12 +82,7 @@ class todoItem extends Component {
                             {icon}
                             <p 
                                 className={this.props.item.done ? 'done' : 'undone'}
-                                onClick={() => this.props.contentClicked(this.props.item.id)}>{this.props.item.content}</p>
-            
-                            <button
-                                type="button" 
-                                className="editButton"
-                                onClick={() => this.props.editClicked(this.props.item.id)}><i className="fa fa-bars"></i></button>
+                                onClick={() => this.props.editClicked(this.props.item.id)}>{this.props.item.content}</p>
                             <button 
                                 type="button" 
                                 className="closeButton"
@@ -93,6 +90,15 @@ class todoItem extends Component {
                             <div className="break"></div>
                             {dueDate}
                             {subTasks}
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={this.props.item.done}
+                                        onChange={() => this.props.contentClicked(this.props.item.id, this.props.columnId)}
+                                        name="checkedB"
+                                        color="primary"/>
+                                }
+                            />
                         </div>
                     )}
             </Draggable>
