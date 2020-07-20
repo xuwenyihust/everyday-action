@@ -1,3 +1,29 @@
 .SubTask {
     margin-top: 10px;
+    display: flex;
+}
+
+.SubTask li {
+    width: 50%;
+}
+
+.SubTask li.done {
+    font-style: italic;
+    text-decoration: line-through;
+}
+
+.SubTask button.closeButton {
+    color: black;
+    background-color: white;
+    font-size: 1px;
+
+    border: none;
+
+    width: 10px;
+    height: 10px;
+
+    margin-top: 0px;
+    padding-top: 0px;
+    padding-left: 5px;
+    padding-right: 15px;
 }
