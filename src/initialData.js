@@ -38,15 +38,15 @@ const initialData = {
             type: "学习",
             due_date: moment().day(-2),
             sub_tasks: {
-                '1': {
+                '1595192263174': {
                     content: "第一集",
                     done: true
                 },
-                '2': {
+                '1595192276071': {
                     content: "第二集",
                     done: false
                 },
-                '3': {
+                '1595192284200': {
                     content: "第三集",
                     done: false
                 }
@@ -107,7 +107,9 @@ const initialData = {
 
     editingItem: false,
     itemUnderEditing: {},
-    dueDatePickFocused: false
+    dueDatePickFocused: false,
+
+    subTaskToSubmit: {}
 }
 
 export default initialData;

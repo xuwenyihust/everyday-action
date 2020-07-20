@@ -106,6 +106,9 @@ class TodoList extends Component {
                 id: newId,
                 created_timestamp: newId,
                 content: itemToSubmit.content,
+                type: null,
+                due_date: null,
+                sub_tasks: {},
                 done: false
             }
 
@@ -205,7 +208,7 @@ class TodoList extends Component {
         this.setState({itemUnderEditing: newItemUnderEditing})
     }
 
-    itemSubTaskClickHandler = (subTaskKey) => {
+    itemSubTaskCheckedHandler = (subTaskKey) => {
         const itemUnderEditing = this.state.itemUnderEditing;
 
         const newSubTask = {
@@ -222,6 +225,67 @@ class TodoList extends Component {
         this.setState({itemUnderEditing: newItemUnderEditing})
     }
 
+    itemSubTaskInputChanged = (event) => {
+        const newSubTaskToSubmit = {
+            content: event.target.value,
+            done: false
+        }
+        this.setState({subTaskToSubmit: newSubTaskToSubmit});
+    }
+
+    itemSubTaskAddHandler = (event) => {
+        event.preventDefault();
+
+        const itemUnderEditing = this.state.itemUnderEditing;
+
+        let subTasks = itemUnderEditing.sub_tasks;
+        const newSubTaskToSubmitId = Date.now().toString();
+        subTasks[newSubTaskToSubmitId] = this.state.subTaskToSubmit
+        console.log(subTasks[newSubTaskToSubmitId]);
+
+        if (Object.entries(subTasks[newSubTaskToSubmitId]).length === 0) {
+            subTasks[newSubTaskToSubmitId] = {
+                content: "新子任务",
+                done: false
+            };
+        }
+
+        const newItemUnderEditing = {
+            ... itemUnderEditing,
+            sub_tasks: subTasks
+        }
+
+        this.setState({itemUnderEditing: newItemUnderEditing});
+    }
+
+    itemSubTaskEdited = (event, subTaskKey) => {
+        const itemUnderEditing = this.state.itemUnderEditing;
+
+        let subTasks = itemUnderEditing.sub_tasks;
+        subTasks[subTaskKey].content = event.target.value;
+
+        const newItemUnderEditing = {
+            ... itemUnderEditing,
+            sub_tasks: subTasks
+        }
+        this.setState({itemUnderEditing: newItemUnderEditing});
+    }
+
+    itemSubTaskCloseHandler = (subTaskKey) => {
+        const itemUnderEditing = this.state.itemUnderEditing;
+
+        let subTasks = itemUnderEditing.sub_tasks;
+        delete subTasks[subTaskKey];
+
+        const newItemUnderEditing = {
+            ... itemUnderEditing,
+            sub_tasks: subTasks
+        }
+
+        this.setState({itemUnderEditing: newItemUnderEditing});
+    }
+
+    // Save/Cancel Button
     editItemSaveHandler = (item) => {
         let items = {... this.state.items};
         items[item.id] = item;
@@ -234,7 +298,6 @@ class TodoList extends Component {
     }
 
     editItemCancelHandler = () => {
-
         this.setState({
             editingItem: false,
             itemUnderEditing: {}
@@ -270,7 +333,11 @@ class TodoList extends Component {
                         itemDueDateChanged={this.itemDueDateChangeHandler}
                         itemDueDateFocusChanged={this.itemDueDateFocusChangeHandler}
                         itemDueDateDeleted={this.itemDueDateDeleteHandler}
-                        subTaskClicked={this.itemSubTaskClickHandler}
+                        subTaskChecked={this.itemSubTaskCheckedHandler}
+                        subTaskInputChanged={this.itemSubTaskInputChanged}
+                        subTaskAdded={this.itemSubTaskAddHandler}
+                        subTaskEdited={this.itemSubTaskEdited}
+                        subTaskClosed={this.itemSubTaskCloseHandler}
                         saveClicked={this.editItemSaveHandler}
                         cancelClicked={this.editItemCancelHandler}/>
                 </Modal>

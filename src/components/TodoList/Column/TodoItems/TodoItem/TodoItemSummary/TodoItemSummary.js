@@ -38,10 +38,13 @@ const todoItemSummary = (props) => {
         subTasks = Object.keys(subTaskObjects).map((subTaskKey) => {
             return <SubTask 
                         key={subTaskKey}
+                        itemKey={props.item.id}
                         subTaskKey={subTaskKey}
                         content={subTaskObjects[subTaskKey].content}
                         checked={subTaskObjects[subTaskKey].done}
-                        subTaskClicked={props.subTaskClicked}/>
+                        subTaskChecked={props.subTaskChecked}
+                        subTaskEdited={props.subTaskEdited}
+                        subTaskClosed={props.subTaskClosed}/>
         });
     }
 
@@ -84,7 +87,10 @@ const todoItemSummary = (props) => {
 
             </div>
 
-            <SubTasks>
+            <SubTasks
+                itemId = {props.item.id}
+                subTaskAdded={props.subTaskAdded}
+                subTaskInputChanged={props.subTaskInputChanged}>
                 {subTasks}
             </SubTasks>
 
